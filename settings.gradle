@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Video Games"
+include ':app'
+include ':feature:feature-main'
+include ':core:core-network-data'
+include ':core:core-model'
+include ':core:core-network-domain'
+include ':core:core-common'

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_game_image">Video game image</string>
+    <string name="video_game_title">Video game title</string>
+</resources>
