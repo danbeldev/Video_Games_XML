@@ -5,6 +5,8 @@ import retrofit2.Response
 
 interface GamesRepository {
 
-    suspend fun getGames():Response<VideoGame>
+    suspend fun getGames(
+        page:Int
+    ):Response<VideoGame>
 
 }

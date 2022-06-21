@@ -7,7 +7,11 @@ import javax.inject.Inject
 class GetGamesUseCase @Inject constructor(
     private val gamesRepository: GamesRepository
 ) {
-    suspend operator fun invoke():VideoGame{
-        return gamesRepository.getGames().body() ?: VideoGame()
+    suspend operator fun invoke(
+        page:Int
+    ):VideoGame{
+        return gamesRepository.getGames(
+            page = page
+        ).body() ?: VideoGame()
     }
 }

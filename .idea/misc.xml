@@ -5,10 +5,13 @@
       <map>
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/app/src/main/res/layout/fragment_main.xml" value="0.12545289855072464" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/drawable/card_shape.xml" value="0.1615" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/drawable/ic_not_image.xml" value="0.1615" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/fragment_blank.xml" value="0.1213768115942029" />
-        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/fragment_main.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/fragment_main.xml" value="0.18" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_creator.xml" value="0.33" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_video_game.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/fragment_video_game_info.xml" value="0.22" />
       </map>
     </option>
   </component>

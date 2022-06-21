@@ -7,11 +7,13 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.feature_main.adapter.VideoGamesAdapter
+import com.example.feature_main.adapter.CreatorsAdapter
+import com.example.feature_main.adapter.VideoGamesPagerAdapter
 import com.example.feature_main.databinding.FragmentMainBinding
 import com.example.feature_main.di.MainComponentViewModel
 import com.example.feature_main.viewModel.MainViewModel
 import dagger.Lazy
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,13 +26,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         mainViewModelFactory.get()
     }
 
-    private var videoGamesAdapter:VideoGamesAdapter? = null
+    private val videoGamesAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        VideoGamesPagerAdapter()
+    }
+
+    private val creatorsAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        CreatorsAdapter()
+    }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this).get<MainComponentViewModel>()
             .newDetailsComponent.inject(this)
-
-        viewModel.getGames()
 
         super.onAttach(context)
     }
@@ -38,18 +44,23 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentMainBinding.bind(view)
 
-        lifecycleScope.launch {
-            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
-                viewModel.responseVideoGame.collect{ videoGame ->
-                    videoGame?.let {
-                        videoGamesAdapter = VideoGamesAdapter(videoGames = videoGame.results)
-                        binding.recyclerView.adapter = videoGamesAdapter
-                    }
-                }
-            }
+        binding.videoGamesRecyclerView.adapter = videoGamesAdapter
+        binding.creatorsRecyclerView.adapter = creatorsAdapter
+
+        lifecycleScope.launch{
+            viewModel.videoGames.collectLatest(videoGamesAdapter::submitData)
         }
 
-        val layoutManager = LinearLayoutManager(this.context)
-        binding.recyclerView.layoutManager = layoutManager
+        lifecycleScope.launch{
+            viewModel.creators.collectLatest(creatorsAdapter::submitData)
+        }
+
+        val videoGameLayoutManager = LinearLayoutManager(this.context)
+        val creatorLayoutManager = LinearLayoutManager(this.context)
+//            GridLayoutManager(this.context, 2)
+        videoGameLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        creatorLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.videoGamesRecyclerView.layoutManager = videoGameLayoutManager
+        binding.creatorsRecyclerView.layoutManager = creatorLayoutManager
     }
 }

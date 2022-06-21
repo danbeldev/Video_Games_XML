@@ -28,9 +28,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
@@ -66,9 +63,6 @@ dependencies {
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-
-    //Paging
-    implementation ("androidx.paging:paging-runtime-ktx:3.1.1")
 
     //Coil
     implementation("io.coil-kt:coil:2.1.0")

@@ -8,7 +8,7 @@
     android:background="@drawable/card_shape">
 
     <ImageView
-        android:id="@+id/videoGameImage"
+        android:id="@+id/creator_photo"
         android:layout_width="match_parent"
         android:layout_height="128dp"
         android:layout_margin="5dp"
@@ -17,11 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/videoGameTitle"
+        app:layout_constraintBottom_toTopOf="@id/creator_name"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/videoGameTitle"
+        android:id="@+id/creator_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/video_game_title"
@@ -31,8 +31,8 @@
         android:lines="1"
         android:ellipsize="end"
         android:layout_marginBottom="15dp"
-        app:layout_constraintStart_toStartOf="@id/videoGameImage"
-        app:layout_constraintEnd_toEndOf="@id/videoGameImage"
+        app:layout_constraintStart_toStartOf="@id/creator_photo"
+        app:layout_constraintEnd_toEndOf="@id/creator_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints" />
 

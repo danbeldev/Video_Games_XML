@@ -11,6 +11,8 @@ interface GamesApi {
 
     @GET(GAMES_URL)
     suspend fun getGames(
-        @Query("key") key:String = RAWQ_KEY
+        @Query("key") key:String = RAWQ_KEY,
+        @Query("page") page:Int,
+        @Query("page_size") page_size:Int = 20
     ):Response<VideoGame>
 }

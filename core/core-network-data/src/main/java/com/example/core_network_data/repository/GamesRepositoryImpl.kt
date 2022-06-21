@@ -10,8 +10,12 @@ class GamesRepositoryImpl @Inject constructor(
     private val gamesApi:GamesApi
 ): GamesRepository {
 
-    override suspend fun getGames(): Response<VideoGame> {
-        return gamesApi.getGames()
+    override suspend fun getGames(
+        page:Int
+    ): Response<VideoGame> {
+        return gamesApi.getGames(
+            page = page
+        )
     }
 
 }

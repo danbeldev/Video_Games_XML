@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.feature_main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_videoGameInfoFragment"
+            app:destination="@id/videoGameInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoGameInfoFragment"
+        android:name="com.example.feature_video_game_info.screen.VideoGameInfoFragment"
+        android:label="VideoGameInfoFragment" >
+        <action
+            android:id="@+id/action_videoGameInfoFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
