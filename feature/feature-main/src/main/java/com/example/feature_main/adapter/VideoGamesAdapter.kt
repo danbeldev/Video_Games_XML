@@ -9,13 +9,16 @@ import coil.load
 import com.example.core_model.api.VideoGameItem
 import com.example.feature_main.databinding.ItemVideoGameBinding
 
-internal class VideoGamesPagerAdapter
-    : PagingDataAdapter<VideoGameItem, VideoGamesViewHolder>(VideoGameItemDiffItemCallback) {
+internal class VideoGamesPagerAdapter(
+    private val onClickVideoGame:(Int) -> Unit
+) : PagingDataAdapter<VideoGameItem, VideoGamesViewHolder>(VideoGameItemDiffItemCallback) {
     override fun onBindViewHolder(holder: VideoGamesViewHolder, position: Int) {
         val videoGame = getItem(position)
+
         with(holder.binding){
             videoGameTitle.text = videoGame?.name
             videoGameImage.load(videoGame?.background_image)
+            videoGameCard.setOnClickListener { videoGame?.id?.let { onClickVideoGame(it) } }
         }
     }
 

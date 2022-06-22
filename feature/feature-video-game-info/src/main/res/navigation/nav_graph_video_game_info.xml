@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_video_game_info"
+    app:startDestination="@id/videoGameInfoFragment">
+
+    <fragment
+        android:id="@+id/videoGameInfoFragment"
+        android:name="com.example.feature_video_game_info.screen.VideoGameInfoFragment"
+        android:label="fragment_video_game_info"
+        tools:layout="@layout/fragment_video_game_info" >
+
+        <deepLink app:uri="jetnavapp://video_game_info/{video_game_id}" />
+
+        <argument
+            android:name="video_game_id"
+            app:argType="integer" />
+
+    </fragment>
+</navigation>

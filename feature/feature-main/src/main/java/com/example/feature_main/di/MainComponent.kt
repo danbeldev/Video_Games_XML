@@ -44,6 +44,6 @@ object MainDepsStore : MainDepsProvider {
 
 internal class MainComponentViewModel : ViewModel() {
 
-    val newDetailsComponent =
+    val mainDetailsComponent =
         DaggerMainComponent.builder().mainDeps(MainDepsProvider.deps).build()
 }
