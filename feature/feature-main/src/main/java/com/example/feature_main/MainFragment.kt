@@ -61,16 +61,20 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentMainBinding.bind(view)
 
+        lifecycleScope.launchWhenCreated {
+            lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
+                viewModel.videoGames.collectLatest(videoGamesAdapter::submitData)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated{
+            lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
+                viewModel.creators.collectLatest(creatorsAdapter::submitData)
+            }
+        }
+
         binding.videoGamesRecyclerView.adapter = videoGamesAdapter
         binding.creatorsRecyclerView.adapter = creatorsAdapter
-
-        lifecycleScope.launch{
-            viewModel.videoGames.collectLatest(videoGamesAdapter::submitData)
-        }
-
-        lifecycleScope.launch{
-            viewModel.creators.collectLatest(creatorsAdapter::submitData)
-        }
 
         val videoGameLayoutManager = LinearLayoutManager(this.context)
         val creatorLayoutManager = LinearLayoutManager(this.context)

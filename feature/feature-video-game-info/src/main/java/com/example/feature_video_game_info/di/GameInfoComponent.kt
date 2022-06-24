@@ -3,7 +3,9 @@ package com.example.feature_video_game_info.di
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
+import com.example.core_network_domain.useCase.game.GetAchievementsUseCase
 import com.example.core_network_domain.useCase.game.GetGameInfoUseCase
+import com.example.core_network_domain.useCase.game.GetScreenshotsUseCase
 import com.example.feature_video_game_info.screen.VideoGameInfoFragment
 import dagger.Component
 import kotlin.properties.Delegates
@@ -24,6 +26,8 @@ interface GameInfoCompany {
 
 interface GameInfoDeps{
     val getGameInfoUseCase: GetGameInfoUseCase
+    val getAchievementsUseCase: GetAchievementsUseCase
+    val getScreenshotsUseCase: GetScreenshotsUseCase
 }
 
 interface GameInfoDepsProvider{

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="video_game_name" tools:ignore="ExtraTranslation">Far Cry 5</string>
+    <string name="video_game_description_name">Description</string>
+    <string name="video_game_description"><![CDATA[Far Cry 5 is an open-world adventure first-person shooter developed by Ubisoft Montreal. It is the fifth main installment in the series.</p>\n<p>Welcome to Hope County, Montana, where a violent religious doomsday cult appeared. You play as a junior deputy sheriff who gets trapped in the Hope County as all the ways out the county are now patrolled with cultists and all external communication is cut off. It is your job to free the county of cultists.</p>\n<p>For the first time in the series, the game features a character creation screen. A wide range of weaponry which varies from pistols to grenade launchers is available to the player. Various vehicles are also at your exposal: cars, planes, helicopters, and so on. </p>\n<p>The game puts a strong emphasis on building the resistance to the cultists. Players have to recruit the locals in order to have more fighters and gain reputation.</p>\n<p>A welcome addition to the game is the so-called Guns For Hire system. It allows the players to choose one of the comrades that will follow them anywhere. For example, hiring a sniper will help the player spot enemy targets in the distance.</p>\n<p>The whole game can be played in both singleplayer and co-op modes.]]></string>
+    <string name="reddit">Reddit</string>
+    <string name="reddit_name">Far Cry</string>
+    <string name="reddit_description">Covering all things Far Cry. Discuss the Far Cry series, share your custom maps, or party up with other players!</string>
+    <string name="metacritic">Metacritic</string>
+    <string name="metacritic_url">https://www.metacritic.com/game/playstation-4/far-cry-5</string>
+    <string name="reddit_url">https://www.reddit.com/r/farcry/</string>
+    <string name="achievement_name">Achievements</string>
+    <string name="achievement_title">Los Santos Legend</string>
+    <string name="achievement_description">Congratulations! You\'re Vinewood\'s biggest star!</string>
+    <string name="message">message</string>
+    <string name="screenshots_name">Screenshots</string>
+</resources>

@@ -1,5 +1,7 @@
 package com.example.core_network_data.repository
 
+import com.example.core_model.api.Achievement
+import com.example.core_model.api.Screenshot
 import com.example.core_model.api.VideoGame
 import com.example.core_model.api.VideoGameInfo
 import com.example.core_network_data.api.GamesApi
@@ -23,4 +25,11 @@ class GamesRepositoryImpl @Inject constructor(
         return gamesApi.getGameInfo(id = id)
     }
 
+    override suspend fun getAchievements(id: Int): Response<Achievement> {
+        return gamesApi.getAchievements(id = id)
+    }
+
+    override suspend fun getScreenshots(gamePk: String, page:Int): Response<Screenshot> {
+        return gamesApi.getScreenshots(gamePk = gamePk, page = page)
+    }
 }

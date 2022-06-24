@@ -1,8 +1,10 @@
 package com.example.videogames.di
 
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
+import com.example.core_network_domain.useCase.game.GetAchievementsUseCase
 import com.example.core_network_domain.useCase.game.GetGameInfoUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
+import com.example.core_network_domain.useCase.game.GetScreenshotsUseCase
 import com.example.feature_main.di.MainDeps
 import com.example.feature_video_game_info.di.GameInfoDeps
 import dagger.Component
@@ -16,6 +18,10 @@ interface AppComponent: MainDeps, GameInfoDeps {
     override val getCreatorsUseCase: GetCreatorsUseCase
 
     override val getGameInfoUseCase: GetGameInfoUseCase
+
+    override val getAchievementsUseCase: GetAchievementsUseCase
+
+    override val getScreenshotsUseCase: GetScreenshotsUseCase
 }
 
 @Scope

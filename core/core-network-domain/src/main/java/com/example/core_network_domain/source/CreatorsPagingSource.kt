@@ -3,6 +3,7 @@ package com.example.core_network_domain.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core_model.api.CreatorItem
+import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 
 class CreatorsPagingSource(
@@ -15,15 +16,17 @@ class CreatorsPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CreatorItem> {
         return try {
 
-            val page = params.key ?: 0
+            val page = params.key ?: 1
 
-            val creatorItem = getCreatorsUseCase.invoke(page = page).results
-
-            LoadResult.Page(
-                data = creatorItem,
-                prevKey = if (page == 1) null else page -1,
-                nextKey = page.plus(1)
-            )
+            when(val creatorItem = getCreatorsUseCase.invoke(page = page)){
+                is Result.Error -> LoadResult.Error(Error(creatorItem.message))
+                is Result.Loading -> LoadResult.Invalid()
+                is Result.Success -> LoadResult.Page(
+                    data = creatorItem.data!!.results,
+                    prevKey = if (page == 1) null else page -1,
+                    nextKey = page.plus(1)
+                )
+            }
         }catch (e:Exception){
             LoadResult.Error(e)
         }

@@ -1,7 +1,11 @@
 package com.example.core_network_data.api
 
+import com.example.core_model.api.Achievement
+import com.example.core_model.api.Screenshot
 import com.example.core_model.api.VideoGame
 import com.example.core_model.api.VideoGameInfo
+import com.example.core_network_data.common.ConstantsUrl.GAMES_ACHIEVEMENTS_URL
+import com.example.core_network_data.common.ConstantsUrl.GAMES_SCREENSHOT_URL
 import com.example.core_network_data.common.ConstantsUrl.GAMES_URL
 import com.example.core_network_data.common.ConstantsUrl.RAWQ_KEY
 import retrofit2.Response
@@ -20,7 +24,21 @@ interface GamesApi {
 
     @GET("$GAMES_URL/{id}")
     suspend fun getGameInfo(
-        @Query("key") key:String = RAWQ_KEY,
-        @Path("id") id:Int
+        @Path("id") id:Int,
+        @Query("key") key:String = RAWQ_KEY
     ):Response<VideoGameInfo>
+
+    @GET(GAMES_ACHIEVEMENTS_URL)
+    suspend fun getAchievements(
+        @Path("id") id: Int,
+        @Query("key") key:String = RAWQ_KEY
+    ):Response<Achievement>
+
+    @GET(GAMES_SCREENSHOT_URL)
+    suspend fun getScreenshots(
+        @Path("game_pk") gamePk:String,
+        @Query("page") page:Int,
+        @Query("page_size") pageSize:Int = 20,
+        @Query("key") key:String = RAWQ_KEY
+    ):Response<Screenshot>
 }

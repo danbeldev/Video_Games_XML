@@ -14,7 +14,7 @@ data class VideoGameInfo(
     val background_image:String,
     val background_image_additional:String,
     val website:String,
-    val rating:Int,
+    val rating:Float,
     val rating_top:Int,
     val ratings:List<VideoGameRating>,
 //    val reactions:List<Int>,
@@ -42,7 +42,7 @@ data class VideoGameInfo(
     val additions_count:Int,
     val game_series_count:Int,
     val esrb_rating:VideGameEsrbRating,
-    val platforms:VideoGamePlatform
+    val platforms:List<VideoGamePlatform>
 )
 
 data class MetacriticPlatform(

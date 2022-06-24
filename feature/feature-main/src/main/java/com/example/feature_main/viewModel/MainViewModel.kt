@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.core_model.api.VideoGameItem
 import com.example.core_network_domain.source.CreatorsPagingSource
 import com.example.core_network_domain.source.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
@@ -24,17 +26,15 @@ internal class MainViewModel(
         CreatorsPagingSource(
             getCreatorsUseCase = getCreatorsUseCase
         )
-    }.flow
-        .stateIn(viewModelScope, SharingStarted.Eagerly, PagingData.empty())
+    }.flow.cachedIn(viewModelScope)
 
-    val videoGames = Pager(
-        PagingConfig(pageSize = 20)
+    val videoGames: Flow<PagingData<VideoGameItem>> = Pager(
+        config = PagingConfig(pageSize = 20)
     ){
         VideoGamesPagingSource(
             getGamesUseCase = getGamesUseCase
         )
-    }.flow
-        .stateIn(viewModelScope, SharingStarted.Eagerly, PagingData.empty())
+    }.flow.cachedIn(viewModelScope)
 
     class Factor @Inject constructor(
         private val getGamesUseCase: GetGamesUseCase,
