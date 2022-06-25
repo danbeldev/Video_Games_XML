@@ -1,9 +1,6 @@
 package com.example.core_network_data.repository
 
-import com.example.core_model.api.Achievement
-import com.example.core_model.api.Screenshot
-import com.example.core_model.api.VideoGame
-import com.example.core_model.api.VideoGameInfo
+import com.example.core_model.api.*
 import com.example.core_network_data.api.GamesApi
 import com.example.core_network_domain.repository.GamesRepository
 import retrofit2.Response
@@ -31,5 +28,13 @@ class GamesRepositoryImpl @Inject constructor(
 
     override suspend fun getScreenshots(gamePk: String, page:Int): Response<Screenshot> {
         return gamesApi.getScreenshots(gamePk = gamePk, page = page)
+    }
+
+    override suspend fun getDeveloperTeam(gamePk: String, page: Int): Response<Creator> {
+        return gamesApi.getDeveloperTeam(gamePk = gamePk, page = page)
+    }
+
+    override suspend fun getTrailer(id: Int): Response<Trailer> {
+        return gamesApi.getTrailer(id = id)
     }
 }

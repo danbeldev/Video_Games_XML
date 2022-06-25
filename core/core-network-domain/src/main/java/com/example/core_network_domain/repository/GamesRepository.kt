@@ -1,9 +1,6 @@
 package com.example.core_network_domain.repository
 
-import com.example.core_model.api.Achievement
-import com.example.core_model.api.Screenshot
-import com.example.core_model.api.VideoGame
-import com.example.core_model.api.VideoGameInfo
+import com.example.core_model.api.*
 import retrofit2.Response
 
 interface GamesRepository {
@@ -24,4 +21,13 @@ interface GamesRepository {
         gamePk:String,
         page:Int
     ):Response<Screenshot>
+
+    suspend fun getDeveloperTeam(
+        gamePk:String,
+        page:Int
+    ):Response<Creator>
+
+    suspend fun getTrailer(
+        id: Int
+    ):Response<Trailer>
 }

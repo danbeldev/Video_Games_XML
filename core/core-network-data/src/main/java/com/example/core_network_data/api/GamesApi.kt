@@ -1,12 +1,11 @@
 package com.example.core_network_data.api
 
-import com.example.core_model.api.Achievement
-import com.example.core_model.api.Screenshot
-import com.example.core_model.api.VideoGame
-import com.example.core_model.api.VideoGameInfo
+import com.example.core_model.api.*
 import com.example.core_network_data.common.ConstantsUrl.GAMES_ACHIEVEMENTS_URL
 import com.example.core_network_data.common.ConstantsUrl.GAMES_SCREENSHOT_URL
 import com.example.core_network_data.common.ConstantsUrl.GAMES_URL
+import com.example.core_network_data.common.ConstantsUrl.GAME_DEVELOPER_TEAM_URL
+import com.example.core_network_data.common.ConstantsUrl.GAME_TRAILER_URL
 import com.example.core_network_data.common.ConstantsUrl.RAWQ_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -41,4 +40,18 @@ interface GamesApi {
         @Query("page_size") pageSize:Int = 20,
         @Query("key") key:String = RAWQ_KEY
     ):Response<Screenshot>
+
+    @GET(GAME_DEVELOPER_TEAM_URL)
+    suspend fun getDeveloperTeam(
+        @Path("game_pk") gamePk: String,
+        @Query("page") page:Int,
+        @Query("page_size") pageSize: Int = 20,
+        @Query("key") key: String = RAWQ_KEY
+    ):Response<Creator>
+
+    @GET(GAME_TRAILER_URL)
+    suspend fun getTrailer(
+        @Path("id") id:Int,
+        @Query("key") key: String = RAWQ_KEY
+    ):Response<Trailer>
 }

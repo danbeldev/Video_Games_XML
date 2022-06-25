@@ -12,11 +12,14 @@ import coil.load
 import com.example.core_common.extension.launchWhenStarted
 import com.example.core_common.extension.parseHtml
 import com.example.core_model.api.Achievement
+import com.example.core_model.api.Trailer
 import com.example.core_model.api.VideoGameInfo
 import com.example.core_network_domain.response.Result
 import com.example.feature_video_game_info.R
 import com.example.feature_video_game_info.adapter.AchievementAdapter
+import com.example.feature_video_game_info.adapter.DeveloperTeamAdapter
 import com.example.feature_video_game_info.adapter.ScreenshotsAdapter
+import com.example.feature_video_game_info.adapter.TrailerAdapter
 import com.example.feature_video_game_info.databinding.FragmentVideoGameInfoBinding
 import com.example.feature_video_game_info.di.GameInfoComponentViewModel
 import com.example.feature_video_game_info.viewModel.VideoGameInfoViewModel
@@ -40,8 +43,14 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
     private var achievementAdapter:AchievementAdapter? = null
 
+    private var trailerAdapter:TrailerAdapter? = null
+
     private val screenshotsAdapter by lazy(LazyThreadSafetyMode.NONE){
-        ScreenshotsAdapter()
+        ScreenshotsAdapter(context = this.context)
+    }
+
+    private val developerTeamAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        DeveloperTeamAdapter()
     }
 
     override fun onAttach(context: Context) {
@@ -56,6 +65,12 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
         val binding = FragmentVideoGameInfoBinding.bind(view)
 
         val videoGameId = arguments?.getInt(VIDEO_GAME_ID_KEY) ?: 0
+
+        val screenshotsLayoutManager = LinearLayoutManager(this.context)
+        screenshotsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        val developerTeamLayoutManager = LinearLayoutManager(this.context)
+        developerTeamLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         viewModel.getVideoGameInfo(videoGameId)
         viewModel.responseVideoGameInfo.onEach {
@@ -74,6 +89,15 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
             }
         }.launchWhenStarted(lifecycle,lifecycleScope)
 
+        viewModel.getTrailer(videoGameId)
+        viewModel.responseTrailer.onEach {
+            when(val result = it){
+                is Result.Error -> Unit
+                is Result.Loading -> Unit
+                is Result.Success -> successTrailer(binding, result.data!!)
+            }
+        }.launchWhenStarted(lifecycle,lifecycleScope)
+
         viewModel.getAchievements(videoGameId)
         viewModel.responseAchievements.onEach {
             when(val result = it){
@@ -85,15 +109,25 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
         lifecycleScope.launchWhenStarted {
             lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
-                viewModel.getScreenshots(gamePk = videoGameId.toString()).collectLatest(screenshotsAdapter::submitData)
+                viewModel.getScreenshots(
+                    gamePk = videoGameId.toString()
+                ).collectLatest(screenshotsAdapter::submitData)
             }
         }
 
-        val screenshotsLayoutManager = LinearLayoutManager(this.context)
-        screenshotsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        lifecycleScope.launchWhenStarted {
+            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
+                viewModel.getDeveloperTeam(
+                    gamePk = videoGameId
+                ).collectLatest(developerTeamAdapter::submitData)
+            }
+        }
 
         binding.screenshots.adapter = screenshotsAdapter
         binding.screenshots.layoutManager = screenshotsLayoutManager
+
+        binding.developerTeam.adapter = developerTeamAdapter
+        binding.developerTeam.layoutManager = developerTeamLayoutManager
     }
 
 
@@ -125,5 +159,21 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
         achievementAdapter = AchievementAdapter(data.results)
         binding.achievements.adapter = achievementAdapter
         binding.achievements.layoutManager = achievementLayoutManager
+    }
+
+    private fun successTrailer(
+        binding: FragmentVideoGameInfoBinding,
+        data:Trailer
+    ){
+        val trailerLayoutManager = LinearLayoutManager(this.context)
+        trailerLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        trailerAdapter = TrailerAdapter(
+            context = this.requireContext(),
+            trailer = data.results
+        )
+
+        binding.trailers.adapter = trailerAdapter
+        binding.trailers.layoutManager = trailerLayoutManager
     }
 }

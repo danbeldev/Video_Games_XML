@@ -19,7 +19,6 @@ import com.example.feature_main.di.MainComponentViewModel
 import com.example.feature_main.viewModel.MainViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -40,7 +39,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                             videoGameId = id
                         )),
                         isModal = true,
-                        isSingleTop = true
+                        isSingleTop = false
                     )
                 )
             )

@@ -65,6 +65,50 @@
                 app:layout_constraintTop_toBottomOf="@+id/description_name" />
 
             <TextView
+                android:id="@+id/trailer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/trailer_name"
+                android:textColor="@color/secondary_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trailer_name"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/developer_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/developer_team"
+                android:textColor="@color/secondary_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trailers" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/developer_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/developer_team_name"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
                 android:id="@+id/screenshots_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +118,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
+                app:layout_constraintTop_toBottomOf="@+id/developer_team" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/screenshots"

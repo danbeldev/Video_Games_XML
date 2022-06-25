@@ -13,5 +13,12 @@ data class CreatorItem(
     val slug:String,
     val image:String,
     val image_background:String,
-    val games_count:Int
+    val games_count:Int,
+    val positions:List<CreatorItemPosition>
+)
+
+data class CreatorItemPosition(
+    val id: Int,
+    val name:String,
+    val slug: String
 )

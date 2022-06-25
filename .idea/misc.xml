@@ -17,7 +17,9 @@
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/drawable/schape.xml" value="0.1615" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/fragment_video_game_info.xml" value="0.16" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_achievement.xml" value="0.5" />
-        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_screenshots.xml" value="0.67" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_developer_team.xml" value="0.33" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_screenshots.xml" value="0.6155555555555555" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_trailer.xml" value="0.33" />
       </map>
     </option>
   </component>

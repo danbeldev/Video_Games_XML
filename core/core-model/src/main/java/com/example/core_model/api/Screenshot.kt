@@ -9,5 +9,6 @@ data class Screenshot(
 
 data class ScreenshotItem(
     val image:String,
-    val hidden:Boolean
+    val width:Int,
+    val height:Int
 )

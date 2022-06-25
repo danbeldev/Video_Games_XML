@@ -14,4 +14,9 @@
     <string name="achievement_description">Congratulations! You\'re Vinewood\'s biggest star!</string>
     <string name="message">message</string>
     <string name="screenshots_name">Screenshots</string>
+    <string name="developer_team_name">Dan Hay</string>
+    <string name="developer_team_game_count">Game count: 7</string>
+    <string name="developer_team">Development team</string>
+    <string name="developer_team_positions">writer, director</string>
+    <string name="trailer_name">Trailers</string>
 </resources>

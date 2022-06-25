@@ -1,20 +1,28 @@
 package com.example.feature_video_game_info.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.core_common.extension.toDp
 import com.example.core_model.api.ScreenshotItem
 import com.example.feature_video_game_info.databinding.ItemScreenshotsBinding
 
-internal class ScreenshotsAdapter: PagingDataAdapter<ScreenshotItem, ScreenshotsViewHolder>(ScreenshotsDiffItemCallback){
+internal class ScreenshotsAdapter(
+    private val context: Context?
+): PagingDataAdapter<ScreenshotItem, ScreenshotsViewHolder>(ScreenshotsDiffItemCallback){
     override fun onBindViewHolder(holder: ScreenshotsViewHolder, position: Int) {
         val screenshot = getItem(position)
 
         with(holder.binding){
             this.screenshot.load(screenshot?.image)
+            context?.let {
+                this.screenshot.minimumWidth = screenshot?.width.toDp(context) ?: 320
+                this.screenshot.minimumHeight = screenshot?.height.toDp(context) ?: 192
+            }
         }
     }
 
@@ -37,6 +45,6 @@ private object ScreenshotsDiffItemCallback : DiffUtil.ItemCallback<ScreenshotIte
     }
 
     override fun areContentsTheSame(oldItem: ScreenshotItem, newItem: ScreenshotItem): Boolean {
-        return oldItem.image == newItem.image && oldItem.hidden == newItem.hidden
+        return oldItem.image == newItem.image && oldItem.width == newItem.width
     }
 }
