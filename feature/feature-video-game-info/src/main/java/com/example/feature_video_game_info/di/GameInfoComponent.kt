@@ -4,14 +4,20 @@ import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
 import com.example.core_network_domain.useCase.game.*
-import com.example.feature_video_game_info.screen.VideoGameInfoFragment
+import com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment
+import com.example.feature_video_game_info.screens.videoGameInfo.VideoGameInfoFragment
+import com.example.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment
 import dagger.Component
 import kotlin.properties.Delegates
 
 @[Feature Component(dependencies = [GameInfoDeps::class])]
 interface GameInfoCompany {
 
-    fun inject(fragment: VideoGameInfoFragment)
+    fun injectVideoGameInfo(fragment: VideoGameInfoFragment)
+
+    fun injectVideoPlayer(fragment: VideoPlayerFragment)
+
+    fun injectAchievements(fragment: AchievementsFragment)
 
     @Component.Builder
     interface Builder{

@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
-            tools:context=".MainFragment"
+            tools:context=".screens.mainScreen.MainFragment"
             tools:listitem="@layout/item_creator">
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
-            tools:context=".MainFragment"
+            tools:context=".screens.mainScreen.MainFragment"
             tools:listitem="@layout/item_video_game">
         </androidx.recyclerview.widget.RecyclerView>
 

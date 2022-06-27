@@ -1,4 +1,4 @@
-package com.example.feature_video_game_info.viewModel
+package com.example.feature_video_game_info.screens.videoGameInfo.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

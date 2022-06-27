@@ -1,4 +1,4 @@
-package com.example.feature_video_game_info.adapter
+package com.example.feature_video_game_info.screens.videoGameInfo.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

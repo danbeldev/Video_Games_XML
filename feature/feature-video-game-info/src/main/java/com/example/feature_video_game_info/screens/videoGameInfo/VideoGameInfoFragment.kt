@@ -1,12 +1,14 @@
-package com.example.feature_video_game_info.screen
+package com.example.feature_video_game_info.screens.videoGameInfo
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.core_common.extension.launchWhenStarted
@@ -15,14 +17,17 @@ import com.example.core_model.api.Achievement
 import com.example.core_model.api.Trailer
 import com.example.core_model.api.VideoGameInfo
 import com.example.core_network_domain.response.Result
+import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_video_game_info.R
-import com.example.feature_video_game_info.adapter.AchievementAdapter
-import com.example.feature_video_game_info.adapter.DeveloperTeamAdapter
-import com.example.feature_video_game_info.adapter.ScreenshotsAdapter
-import com.example.feature_video_game_info.adapter.TrailerAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.AchievementAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.DeveloperTeamAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.ScreenshotsAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.TrailerAdapter
 import com.example.feature_video_game_info.databinding.FragmentVideoGameInfoBinding
 import com.example.feature_video_game_info.di.GameInfoComponentViewModel
-import com.example.feature_video_game_info.viewModel.VideoGameInfoViewModel
+import com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment
+import com.example.feature_video_game_info.screens.videoGameInfo.viewModel.VideoGameInfoViewModel
+import com.example.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
@@ -55,7 +60,7 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this).get<GameInfoComponentViewModel>()
-            .gameInfoDetailsComponent.inject(this)
+            .gameInfoDetailsComponent.injectVideoGameInfo(this)
 
         super.onAttach(context)
     }
@@ -94,7 +99,7 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
             when(val result = it){
                 is Result.Error -> Unit
                 is Result.Loading -> Unit
-                is Result.Success -> successTrailer(binding, result.data!!)
+                is Result.Success -> successTrailer(binding, result.data!!, videoGameId)
             }
         }.launchWhenStarted(lifecycle,lifecycleScope)
 
@@ -128,6 +133,14 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
         binding.developerTeam.adapter = developerTeamAdapter
         binding.developerTeam.layoutManager = developerTeamLayoutManager
+
+        binding.achievementName.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_videoGameInfoFragment_to_achievementsFragment,
+                bundleOf(AchievementsFragment.VIDEO_GAME_ID_KEY to videoGameId),
+                navOptionIsModal()
+            )
+        }
     }
 
 
@@ -156,21 +169,34 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
         val achievementLayoutManager = LinearLayoutManager(this.context)
         achievementLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
-        achievementAdapter = AchievementAdapter(data.results)
+        achievementAdapter = AchievementAdapter(
+            achievements = data.results,
+            onClickAchievement = {}
+        )
         binding.achievements.adapter = achievementAdapter
         binding.achievements.layoutManager = achievementLayoutManager
     }
 
     private fun successTrailer(
         binding: FragmentVideoGameInfoBinding,
-        data:Trailer
+        data:Trailer,
+        videoGameId:Int
     ){
         val trailerLayoutManager = LinearLayoutManager(this.context)
         trailerLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         trailerAdapter = TrailerAdapter(
-            context = this.requireContext(),
-            trailer = data.results
+            trailer = data.results,
+            onClickTrailerPreview = {
+                findNavController().navigate(
+                    R.id.action_videoGameInfoFragment_to_videoPlayerFragment,
+                    bundleOf(
+                        VideoPlayerFragment.VIDEO_GAME_ID_KEY to videoGameId,
+                        VideoPlayerFragment.VIDEO_GAME_TRAILER_ID_KEY to it
+                    ),
+                    navOptionIsModal()
+                )
+            }
         )
 
         binding.trailers.adapter = trailerAdapter

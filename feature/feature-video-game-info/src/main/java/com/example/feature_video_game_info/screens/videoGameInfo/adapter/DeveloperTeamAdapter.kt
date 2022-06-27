@@ -1,4 +1,4 @@
-package com.example.feature_video_game_info.adapter
+package com.example.feature_video_game_info.screens.videoGameInfo.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.feature_video_game_info.adapter
+package com.example.feature_video_game_info.screens.videoGameInfo.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,8 @@ import com.example.core_model.api.AchievementItem
 import com.example.feature_video_game_info.databinding.ItemAchievementBinding
 
 internal class AchievementAdapter(
-    private val achievements:List<AchievementItem>
+    private val achievements:List<AchievementItem>,
+    private val onClickAchievement:(AchievementItem) -> Unit
 ): RecyclerView.Adapter<AchievementViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementViewHolder {
@@ -26,6 +27,7 @@ internal class AchievementAdapter(
             achievementImage.load(achievement.image)
             achievementTitle.text = "${achievement.name}, ${achievement.percent}"
             achievementDescription.text = achievement.description
+            this.achievement.setOnClickListener { onClickAchievement(achievement) }
         }
     }
 

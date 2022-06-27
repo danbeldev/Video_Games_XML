@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.example.core_common.naigation.NavCommand
 import com.example.core_common.naigation.NavCommands
 import com.example.core_common.naigation.NavigationProvider
-import com.example.core_common.R
+import com.example.core_ui.R
 
 class MainActivity : AppCompatActivity(), NavigationProvider {
 

@@ -1,17 +1,15 @@
-package com.example.feature_video_game_info.adapter
+package com.example.feature_video_game_info.screens.videoGameInfo.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.core_model.api.TrailerItem
 import com.example.feature_video_game_info.databinding.ItemTrailerBinding
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
 
 internal class TrailerAdapter(
-    private val context: Context,
-    private val trailer: List<TrailerItem>
+    private val trailer: List<TrailerItem>,
+    private val onClickTrailerPreview:(Int) -> Unit
 ):RecyclerView.Adapter<TrailerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrailerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,18 +21,9 @@ internal class TrailerAdapter(
     override fun onBindViewHolder(holder: TrailerViewHolder, position: Int) {
         val trailerItem = trailer[position]
 
-        val exoPlayer = ExoPlayer.Builder(context)
-            .build()
-
-        exoPlayer.apply {
-            setMediaItem(MediaItem.fromUri(trailerItem.data.max))
-            playWhenReady = true
-            prepare()
-            pause()
-        }
-
         with(holder.binding){
-            playerView.player = exoPlayer
+            videoPreview.load(trailerItem.preview)
+            videoPreview.setOnClickListener { onClickTrailerPreview(trailerItem.id) }
         }
     }
 

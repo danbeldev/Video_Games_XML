@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
-import com.example.feature_main.MainFragment
+import com.example.feature_main.screens.mainScreen.MainFragment
+import com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment
 import dagger.Component
 import kotlin.properties.Delegates
 
 @[Feature Component(dependencies = [MainDeps::class])]
 interface MainComponent{
 
-    fun inject(fragment:MainFragment)
+    fun injectMainFragment(fragment: MainFragment)
+
+    fun injectVideoGames(fragment: VideoGamesFragment)
 
     @Component.Builder
     interface Builder{

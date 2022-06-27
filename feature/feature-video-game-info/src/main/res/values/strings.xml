@@ -19,4 +19,6 @@
     <string name="developer_team">Development team</string>
     <string name="developer_team_positions">writer, director</string>
     <string name="trailer_name">Trailers</string>
+    <string name="trailer_title">Cuphead Announcement Trailer (2017)</string>
+    <string name="achievement_percent">24 %</string>
 </resources>

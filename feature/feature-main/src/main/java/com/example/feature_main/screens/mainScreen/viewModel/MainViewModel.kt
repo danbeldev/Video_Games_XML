@@ -1,4 +1,4 @@
-package com.example.feature_main.viewModel
+package com.example.feature_main.screens.mainScreen.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

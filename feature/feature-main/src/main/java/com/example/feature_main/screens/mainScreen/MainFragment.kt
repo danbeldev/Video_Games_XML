@@ -1,4 +1,4 @@
-package com.example.feature_main
+package com.example.feature_main.screens.mainScreen
 
 import android.content.Context
 import android.net.Uri
@@ -12,11 +12,12 @@ import com.example.core_common.naigation.NavCommand
 import com.example.core_common.naigation.NavCommands
 import com.example.core_common.naigation.Screen
 import com.example.core_common.naigation.navigation
-import com.example.feature_main.adapter.CreatorsAdapter
-import com.example.feature_main.adapter.VideoGamesPagerAdapter
+import com.example.feature_main.R
+import com.example.feature_main.screens.mainScreen.adapter.CreatorsAdapter
+import com.example.feature_main.screens.mainScreen.adapter.VideoGamesPagerAdapter
 import com.example.feature_main.databinding.FragmentMainBinding
 import com.example.feature_main.di.MainComponentViewModel
-import com.example.feature_main.viewModel.MainViewModel
+import com.example.feature_main.screens.mainScreen.viewModel.MainViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -52,7 +53,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this).get<MainComponentViewModel>()
-            .mainDetailsComponent.inject(this)
+            .mainDetailsComponent.injectMainFragment(this)
 
         super.onAttach(context)
     }
