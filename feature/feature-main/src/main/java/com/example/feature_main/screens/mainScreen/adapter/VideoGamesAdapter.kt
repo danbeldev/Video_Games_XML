@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.core_model.api.VideoGameItem
-import com.example.feature_main.databinding.ItemVideoGameBinding
+import com.example.feature_main.databinding.ItemVideoGameHorizontalBinding
 
 internal class VideoGamesPagerAdapter(
     private val onClickVideoGame:(Int) -> Unit
@@ -24,7 +24,7 @@ internal class VideoGamesPagerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoGamesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemVideoGameBinding.inflate(inflater, parent, false)
+        val binding = ItemVideoGameHorizontalBinding.inflate(inflater, parent, false)
 
         return VideoGamesViewHolder(binding)
     }
@@ -32,7 +32,7 @@ internal class VideoGamesPagerAdapter(
 }
 
 internal class VideoGamesViewHolder(
-    val binding: ItemVideoGameBinding
+    val binding: ItemVideoGameHorizontalBinding
 ): RecyclerView.ViewHolder(binding.root)
 
 private object VideoGameItemDiffItemCallback : DiffUtil.ItemCallback<VideoGameItem>() {

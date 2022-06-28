@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             tools:context=".screens.mainScreen.MainFragment"
-            tools:listitem="@layout/item_video_game">
+            tools:listitem="@layout/item_video_game_horizontal">
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>

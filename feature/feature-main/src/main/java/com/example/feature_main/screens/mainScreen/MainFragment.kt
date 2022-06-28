@@ -5,13 +5,16 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core_common.naigation.NavCommand
 import com.example.core_common.naigation.NavCommands
 import com.example.core_common.naigation.Screen
 import com.example.core_common.naigation.navigation
+import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_main.R
 import com.example.feature_main.screens.mainScreen.adapter.CreatorsAdapter
 import com.example.feature_main.screens.mainScreen.adapter.VideoGamesPagerAdapter
@@ -83,5 +86,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         creatorLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.videoGamesRecyclerView.layoutManager = videoGameLayoutManager
         binding.creatorsRecyclerView.layoutManager = creatorLayoutManager
+
+        binding.videoGamesText.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_mainFragment_to_videoGamesFragment,
+                bundleOf(),
+                navOptionIsModal()
+            )
+        }
     }
 }

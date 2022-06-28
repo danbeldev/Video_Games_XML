@@ -11,6 +11,15 @@
 
         <deepLink app:uri="jetnavapp://main" />
 
+        <action
+            android:id="@+id/action_mainFragment_to_videoGamesFragment"
+            app:destination="@id/videoGamesFragment" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/videoGamesFragment"
+        android:name="com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment"
+        android:label="VideoGamesFragment" />
 
 </navigation>

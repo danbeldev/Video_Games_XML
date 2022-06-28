@@ -13,5 +13,6 @@ data class VideoGameItem(
     val name:String,
     val released:String,
     val tba:Boolean,
-    val background_image:String
+    val background_image:String,
+    val rating:Float
 )
