@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_platform"
+    app:startDestination="@id/platformInfoFragment">
+
+    <fragment
+        android:id="@+id/platformInfoFragment"
+        android:name="com.example.feature_platform_info.screens.platformInfo.PlatformInfoFragment"
+        android:label="PlatformInfoFragment" >
+
+        <deepLink
+            app:uri="jetnavapp://platform/{platform_id}"/>
+
+        <argument
+            android:name="platform_id"
+            app:argType="integer"/>
+
+    </fragment>
+</navigation>

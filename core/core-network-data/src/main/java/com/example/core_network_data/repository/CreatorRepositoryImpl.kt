@@ -1,6 +1,6 @@
 package com.example.core_network_data.repository
 
-import com.example.core_model.api.Creator
+import com.example.core_model.api.creator.Creator
 import com.example.core_network_data.api.CreatorApi
 import com.example.core_network_domain.repository.CreatorRepository
 import retrofit2.Response

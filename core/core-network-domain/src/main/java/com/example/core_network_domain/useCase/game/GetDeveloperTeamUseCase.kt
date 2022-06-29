@@ -1,6 +1,6 @@
 package com.example.core_network_domain.useCase.game
 
-import com.example.core_model.api.Creator
+import com.example.core_model.api.creator.Creator
 import com.example.core_network_domain.repository.GamesRepository
 import com.example.core_network_domain.response.BaseApiResponse
 import com.example.core_network_domain.response.Result

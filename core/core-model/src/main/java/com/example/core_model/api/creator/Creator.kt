@@ -1,4 +1,4 @@
-package com.example.core_model.api
+package com.example.core_model.api.creator
 
 data class Creator(
     val count:Int,

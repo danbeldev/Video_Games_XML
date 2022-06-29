@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.core_model.api.Trailer
-import com.example.core_model.api.TrailerItem
+import com.example.core_model.api.videoGame.Trailer
+import com.example.core_model.api.videoGame.TrailerItem
 import com.example.feature_video_game_info.databinding.ItemVideoPlayerTrailerBinding
 
 internal class VideoPlayerTrailerAdapter(
-    private val trailer:Trailer,
+    private val trailer: Trailer,
     private val onClickTrailerPreview:(TrailerItem) -> Unit
 ):RecyclerView.Adapter<VideoPlayerTrailerViewHolder>() {
 

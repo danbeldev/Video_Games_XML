@@ -7,22 +7,29 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.core_model.api.VideoGameItem
+import com.example.core_model.api.videoGame.VideoGameItem
 import com.example.core_network_domain.source.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 internal class VideoGamesViewModel(
     private val getVideoGamesUseCase: GetGamesUseCase
 ):ViewModel() {
 
-    fun getVideoGames(): Flow<PagingData<VideoGameItem>> {
-        return Pager(PagingConfig(pageSize = 20)){
+    private val _responseVideoGames:MutableStateFlow<PagingData<VideoGameItem>> =
+        MutableStateFlow(PagingData.empty())
+    val responseVideoGames = _responseVideoGames.asStateFlow()
+
+    fun getVideoGames(search:String? = null) {
+        Pager(PagingConfig(pageSize = 20)){
             VideoGamesPagingSource(
-                getGamesUseCase = getVideoGamesUseCase
+                getGamesUseCase = getVideoGamesUseCase,
+                search = search
             )
-        }.flow.cachedIn(viewModelScope)
+        }.flow.cachedIn(viewModelScope).onEach {
+            _responseVideoGames.value = it
+        }.launchIn(viewModelScope)
     }
 
     class Factory @Inject constructor(

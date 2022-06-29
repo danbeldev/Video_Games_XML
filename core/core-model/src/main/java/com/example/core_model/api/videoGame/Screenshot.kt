@@ -1,4 +1,4 @@
-package com.example.core_model.api
+package com.example.core_model.api.videoGame
 
 data class Screenshot(
     val count:Int,

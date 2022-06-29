@@ -20,6 +20,7 @@ import com.example.feature_main.screens.mainScreen.adapter.CreatorsAdapter
 import com.example.feature_main.screens.mainScreen.adapter.VideoGamesPagerAdapter
 import com.example.feature_main.databinding.FragmentMainBinding
 import com.example.feature_main.di.MainComponentViewModel
+import com.example.feature_main.screens.mainScreen.adapter.PlatformsAdapter
 import com.example.feature_main.screens.mainScreen.viewModel.MainViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
@@ -50,6 +51,22 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
+    private val platformAdapter by lazy(LazyThreadSafetyMode.NONE){
+        PlatformsAdapter(
+            onPlatformItemClick = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.PlatformInfo.arguments(it?.id ?: 0)),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
+            }
+        )
+    }
+
     private val creatorsAdapter by lazy(LazyThreadSafetyMode.NONE) {
         CreatorsAdapter()
     }
@@ -64,6 +81,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentMainBinding.bind(view)
 
+        val videoGameLayoutManager = LinearLayoutManager(this.context)
+        val creatorLayoutManager = LinearLayoutManager(this.context)
+        val platformLayoutManager = LinearLayoutManager(this.context)
+
         lifecycleScope.launchWhenCreated {
             lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
                 viewModel.videoGames.collectLatest(videoGamesAdapter::submitData)
@@ -76,16 +97,25 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }
 
+        lifecycleScope.launchWhenCreated {
+            lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
+                viewModel.platforms.collectLatest(platformAdapter::submitData)
+            }
+        }
+
+        binding.platformRecyclerView.adapter = platformAdapter
+
         binding.videoGamesRecyclerView.adapter = videoGamesAdapter
         binding.creatorsRecyclerView.adapter = creatorsAdapter
 
-        val videoGameLayoutManager = LinearLayoutManager(this.context)
-        val creatorLayoutManager = LinearLayoutManager(this.context)
 //            GridLayoutManager(this.context, 2)
         videoGameLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         creatorLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        platformLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+
         binding.videoGamesRecyclerView.layoutManager = videoGameLayoutManager
         binding.creatorsRecyclerView.layoutManager = creatorLayoutManager
+        binding.platformRecyclerView.layoutManager = platformLayoutManager
 
         binding.videoGamesText.setOnClickListener {
             findNavController().navigate(

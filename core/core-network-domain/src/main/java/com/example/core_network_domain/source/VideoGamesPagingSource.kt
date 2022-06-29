@@ -2,12 +2,13 @@ package com.example.core_network_domain.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.core_model.api.VideoGameItem
+import com.example.core_model.api.videoGame.VideoGameItem
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 
 class VideoGamesPagingSource(
-    private val getGamesUseCase: GetGamesUseCase
+    private val getGamesUseCase: GetGamesUseCase,
+    private val search:String? = null
 ):PagingSource<Int, VideoGameItem>() {
     override fun getRefreshKey(state: PagingState<Int, VideoGameItem>): Int? {
         return state.anchorPosition
@@ -18,7 +19,10 @@ class VideoGamesPagingSource(
 
             val page = params.key ?: 1
 
-            when(val videoGameItem = getGamesUseCase.invoke(page)){
+            when(val videoGameItem = getGamesUseCase.invoke(
+                page = page,
+                search = search
+            )){
                 is Result.Error -> LoadResult.Error(Exception(videoGameItem.message))
                 is Result.Loading -> LoadResult.Invalid()
                 is Result.Success -> {

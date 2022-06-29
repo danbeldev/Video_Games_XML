@@ -2,7 +2,7 @@ package com.example.core_network_domain.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.core_model.api.ScreenshotItem
+import com.example.core_model.api.videoGame.ScreenshotItem
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.useCase.game.GetScreenshotsUseCase
 

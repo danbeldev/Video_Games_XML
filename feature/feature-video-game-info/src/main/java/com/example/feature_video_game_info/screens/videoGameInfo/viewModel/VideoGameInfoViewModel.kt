@@ -7,7 +7,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.core_model.api.*
+import com.example.core_model.api.creator.CreatorItem
+import com.example.core_model.api.videoGame.Achievement
+import com.example.core_model.api.videoGame.ScreenshotItem
+import com.example.core_model.api.videoGame.Trailer
+import com.example.core_model.api.videoGame.VideoGameInfo
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.source.DeveloperTeamPageSource
 import com.example.core_network_domain.source.VideoGameScreenshots

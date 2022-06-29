@@ -1,6 +1,6 @@
 package com.example.core_network_data.api
 
-import com.example.core_model.api.Creator
+import com.example.core_model.api.creator.Creator
 import com.example.core_network_data.common.ConstantsUrl.RAWQ_KEY
 import com.example.core_network_data.common.ConstantsUrl.CREATORS_URL
 import retrofit2.Response

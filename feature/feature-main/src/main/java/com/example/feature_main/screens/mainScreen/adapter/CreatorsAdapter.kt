@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.core_model.api.CreatorItem
+import com.example.core_model.api.creator.CreatorItem
 import com.example.feature_main.databinding.ItemCreatorBinding
 
 internal class CreatorsAdapter

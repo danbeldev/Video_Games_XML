@@ -1,6 +1,7 @@
 package com.example.core_network_data.repository
 
-import com.example.core_model.api.*
+import com.example.core_model.api.creator.Creator
+import com.example.core_model.api.videoGame.*
 import com.example.core_network_data.api.GamesApi
 import com.example.core_network_domain.repository.GamesRepository
 import retrofit2.Response
@@ -11,10 +12,12 @@ class GamesRepositoryImpl @Inject constructor(
 ): GamesRepository {
 
     override suspend fun getGames(
-        page:Int
+        page: Int,
+        search: String?
     ): Response<VideoGame> {
         return gamesApi.getGames(
-            page = page
+            page = page,
+            search = search
         )
     }
 

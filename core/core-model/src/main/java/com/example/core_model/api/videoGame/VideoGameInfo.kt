@@ -1,4 +1,4 @@
-package com.example.core_model.api
+package com.example.core_model.api.videoGame
 
 data class VideoGameInfo(
     val id:Int,
@@ -19,7 +19,7 @@ data class VideoGameInfo(
     val ratings:List<VideoGameRating>,
 //    val reactions:List<Int>,
     val added:Int,
-    val added_by_status:VideoGameAddedStatus,
+    val added_by_status: VideoGameAddedStatus,
     val playtime:Int,
     val screenshots_count:Int,
     val movies_count:Int,
@@ -41,7 +41,7 @@ data class VideoGameInfo(
     val parents_count:Int,
     val additions_count:Int,
     val game_series_count:Int,
-    val esrb_rating:VideGameEsrbRating,
+    val esrb_rating: VideGameEsrbRating,
     val platforms:List<VideoGamePlatform>
 )
 
@@ -74,8 +74,8 @@ data class VideGameEsrbRating(
 
 data class VideoGamePlatform(
     val released_at:String,
-    val platform:VideoGamePlatformItem,
-    val requirements:VideGamePlatformRequirement
+    val platform: VideoGamePlatformItem,
+    val requirements: VideGamePlatformRequirement
 )
 
 data class VideoGamePlatformItem(

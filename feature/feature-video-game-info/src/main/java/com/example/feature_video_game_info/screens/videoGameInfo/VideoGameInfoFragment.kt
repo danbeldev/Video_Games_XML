@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.core_common.extension.launchWhenStarted
 import com.example.core_common.extension.parseHtml
-import com.example.core_model.api.Achievement
-import com.example.core_model.api.Trailer
-import com.example.core_model.api.VideoGameInfo
+import com.example.core_model.api.videoGame.Achievement
+import com.example.core_model.api.videoGame.Trailer
+import com.example.core_model.api.videoGame.VideoGameInfo
 import com.example.core_network_domain.response.Result
 import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_video_game_info.R
@@ -146,7 +146,7 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
     private fun successVideoGameInfo(
         binding: FragmentVideoGameInfoBinding,
-        data:VideoGameInfo
+        data: VideoGameInfo
     ){
         binding.videoGameInfo.visibility = View.VISIBLE
         binding.responseVideoGameInfo.visibility = View.GONE
@@ -179,7 +179,7 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
     private fun successTrailer(
         binding: FragmentVideoGameInfoBinding,
-        data:Trailer,
+        data: Trailer,
         videoGameId:Int
     ){
         val trailerLayoutManager = LinearLayoutManager(this.context)

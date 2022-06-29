@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.core_model.api.TrailerItem
+import com.example.core_model.api.videoGame.TrailerItem
 import com.example.feature_video_game_info.databinding.ItemTrailerBinding
 
 internal class TrailerAdapter(

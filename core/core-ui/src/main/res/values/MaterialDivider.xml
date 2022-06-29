@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.App.MaterialDivider" parent="Widget.MaterialComponents.MaterialDivider">
+        <item name="dividerColor">@color/shrine_divider_color</item>
+    </style>
+
+    <color name="shrine_divider_color">#313131</color>
+</resources>

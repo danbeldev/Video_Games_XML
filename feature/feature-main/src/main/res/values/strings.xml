@@ -6,4 +6,9 @@
     <string name="creators">Creators</string>
     <string name="search">search</string>
     <string name="video_game_rating">89</string>
+    <string name="sorting">Sorting</string>
+    <string name="rating_metacritic">Rating Metacritic</string>
+    <string name="rating_metacritic_min">Min</string>
+    <string name="platform_text">Platforms</string>
+    <string name="platform_name">PlayStation 5</string>
 </resources>

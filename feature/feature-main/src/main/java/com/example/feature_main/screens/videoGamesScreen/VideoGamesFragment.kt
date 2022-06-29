@@ -3,12 +3,10 @@ package com.example.feature_main.screens.videoGamesScreen
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
+import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
@@ -24,6 +22,7 @@ import com.example.feature_main.screens.videoGamesScreen.adapter.VideoGameVertic
 import com.example.feature_main.screens.videoGamesScreen.viewModel.VideoGamesViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class VideoGamesFragment : Fragment(R.layout.fragment_video_games), SearchView.OnQueryTextListener {
@@ -65,9 +64,18 @@ class VideoGamesFragment : Fragment(R.layout.fragment_video_games), SearchView.O
 
         val videoGamesLayoutManager = LinearLayoutManager(this.context)
 
-        lifecycleScope.launchWhenStarted {
-            lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
-                viewModel.getVideoGames().collectLatest(videoGameVerticalAdapter::submitData)
+        viewModel.getVideoGames()
+        lifecycleScope.launch {
+            viewModel.responseVideoGames.collectLatest(videoGameVerticalAdapter::submitData)
+        }
+
+        binding.topToolbar.menu.forEach { menuItem ->
+            when(menuItem.itemId){
+                R.id.search -> {
+                    val search = menuItem.actionView as SearchView
+                    search.isSubmitButtonEnabled = true
+                    search.setOnQueryTextListener(this)
+                }
             }
         }
 
@@ -75,39 +83,17 @@ class VideoGamesFragment : Fragment(R.layout.fragment_video_games), SearchView.O
         binding.videoGames.layoutManager = videoGamesLayoutManager
 
         binding.topToolbar.setNavigationOnClickListener {
-            binding.drawerLayout.openDrawer(Gravity.LEFT)
+            binding.drawerLayout.openDrawer(GravityCompat.START)
         }
-
-        binding.topToolbar.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.search -> {
-                    val search = menuItem.actionView as SearchView
-                    search.isSubmitButtonEnabled = true
-                    search.setOnQueryTextListener(this)
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menuInflater.inflate(R.menu.video_games_top_app_bar, menu)
-
-        val search = menu.findItem(R.id.search)
-        val searchView = search?.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-
     }
 
     override fun onQueryTextSubmit(search: String?): Boolean {
-        Toast.makeText(this.context, search, Toast.LENGTH_SHORT).show()
+        viewModel.getVideoGames(search = search)
         return true
     }
 
     override fun onQueryTextChange(search: String?): Boolean {
-        Toast.makeText(this.context, search, Toast.LENGTH_SHORT).show()
+        viewModel.getVideoGames(search = search)
         return true
     }
 }

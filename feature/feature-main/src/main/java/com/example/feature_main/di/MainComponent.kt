@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
+import com.example.core_network_domain.useCase.platform.GetPlatformUseCase
 import com.example.feature_main.screens.mainScreen.MainFragment
 import com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment
 import dagger.Component
@@ -30,6 +31,7 @@ interface MainComponent{
 interface MainDeps{
     val getGamesUseCase: GetGamesUseCase
     val getCreatorsUseCase:GetCreatorsUseCase
+    val getPlatformUseCase: GetPlatformUseCase
 }
 
 interface MainDepsProvider {

@@ -1,4 +1,4 @@
-package com.example.core_model.api
+package com.example.core_model.api.videoGame
 
 data class Trailer(
     val count:Int,
@@ -9,7 +9,7 @@ data class TrailerItem(
     val id:Int,
     val name:String,
     val preview:String,
-    val data:TrailerItemData
+    val data: TrailerItemData
 )
 
 data class TrailerItemData(

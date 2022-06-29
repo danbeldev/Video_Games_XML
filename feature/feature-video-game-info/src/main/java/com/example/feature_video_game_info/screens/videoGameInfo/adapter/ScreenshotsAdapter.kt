@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.core_common.extension.toDp
-import com.example.core_model.api.ScreenshotItem
+import com.example.core_model.api.videoGame.ScreenshotItem
 import com.example.feature_video_game_info.databinding.ItemScreenshotsBinding
 
 internal class ScreenshotsAdapter(

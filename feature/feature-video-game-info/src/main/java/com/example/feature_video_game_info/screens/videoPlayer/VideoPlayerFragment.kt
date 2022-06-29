@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.core_common.extension.launchWhenStarted
-import com.example.core_model.api.Trailer
-import com.example.core_model.api.VideoGameInfo
+import com.example.core_model.api.videoGame.Trailer
+import com.example.core_model.api.videoGame.VideoGameInfo
 import com.example.core_network_domain.response.Result
 import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_video_game_info.R
@@ -78,7 +78,7 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
 
     private fun trailerSuccess(
         biding:FragmentVideoPlayerBinding,
-        data:Trailer,
+        data: Trailer,
         videoGameTrailerId:Int
     ){
         val layoutManagerTrailers = LinearLayoutManager(this.context)
@@ -115,7 +115,7 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
 
     private fun gameInfoSuccess(
         biding:FragmentVideoPlayerBinding,
-        data:VideoGameInfo,
+        data: VideoGameInfo,
         videoGameId:Int
     ){
         biding.imageVideoGame.load(data.background_image)

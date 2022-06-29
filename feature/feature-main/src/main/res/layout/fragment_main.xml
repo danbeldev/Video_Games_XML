@@ -11,25 +11,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/creators_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/creators"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/creators_recycler_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            tools:context=".screens.mainScreen.MainFragment"
-            tools:listitem="@layout/item_creator">
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
             android:id="@+id/video_games_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,8 +25,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
-            tools:context=".screens.mainScreen.MainFragment"
-            tools:listitem="@layout/item_video_game_horizontal">
+            tools:context=".screens.mainScreen.MainFragment">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/platform_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/platform_text"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/platform_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            tools:context=".screens.mainScreen.MainFragment">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/creators_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/creators"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/creators_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            tools:context=".screens.mainScreen.MainFragment">
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>

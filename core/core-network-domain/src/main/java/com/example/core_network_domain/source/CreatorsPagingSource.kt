@@ -2,7 +2,7 @@ package com.example.core_network_domain.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.core_model.api.CreatorItem
+import com.example.core_model.api.creator.CreatorItem
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 

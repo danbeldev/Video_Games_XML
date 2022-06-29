@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.core_model.api.AchievementItem
+import com.example.core_model.api.videoGame.AchievementItem
 import com.example.feature_video_game_info.databinding.ItemAchievementBinding
 
 internal class AchievementAdapter(

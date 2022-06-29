@@ -1,12 +1,14 @@
 package com.example.core_network_domain.repository
 
-import com.example.core_model.api.*
+import com.example.core_model.api.creator.Creator
+import com.example.core_model.api.videoGame.*
 import retrofit2.Response
 
 interface GamesRepository {
 
     suspend fun getGames(
-        page:Int
+        page:Int,
+        search:String?
     ):Response<VideoGame>
 
     suspend fun getGameInfo(

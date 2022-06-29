@@ -3,7 +3,7 @@ package com.example.feature_video_game_info.screens.achievementsScreen.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.core_model.api.Achievement
+import com.example.core_model.api.videoGame.Achievement
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.useCase.game.GetAchievementsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow

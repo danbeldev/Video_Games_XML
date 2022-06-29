@@ -3,8 +3,8 @@ package com.example.feature_video_game_info.screens.videoPlayer.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.core_model.api.Trailer
-import com.example.core_model.api.VideoGameInfo
+import com.example.core_model.api.videoGame.Trailer
+import com.example.core_model.api.videoGame.VideoGameInfo
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.useCase.game.GetGameInfoUseCase
 import com.example.core_network_domain.useCase.game.GetTrailerUseCase

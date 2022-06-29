@@ -9,4 +9,9 @@ sealed class Screen(val route:String){
             videoGameId:Int
         ):String = "${BASE_URL}video_game_info/$videoGameId"
     }
+    object PlatformInfo:Screen("${BASE_URL}platform/{platform_id}"){
+        fun arguments(
+            platformId:Int
+        ):String = "${BASE_URL}platform/$platformId"
+    }
 }
