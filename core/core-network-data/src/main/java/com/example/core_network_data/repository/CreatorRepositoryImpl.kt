@@ -1,6 +1,7 @@
 package com.example.core_network_data.repository
 
 import com.example.core_model.api.creator.Creator
+import com.example.core_model.api.creator.CreatorInfo
 import com.example.core_network_data.api.CreatorApi
 import com.example.core_network_domain.repository.CreatorRepository
 import retrofit2.Response
@@ -12,5 +13,9 @@ class CreatorRepositoryImpl @Inject constructor(
 
     override suspend fun getCreators(page: Int): Response<Creator> {
         return creatorApi.getCreators()
+    }
+
+    override suspend fun getCreatorById(id: Int): Response<CreatorInfo> {
+        return creatorApi.getCreatorById(id = id)
     }
 }

@@ -20,7 +20,6 @@ internal class VideoGameVerticalAdapter(
         with(holder.binding){
             videoGameImage.load(videoGame?.background_image)
             videoGameTitle.text = videoGame?.name
-            videoGameRating.text = videoGame?.rating.toString()
 
             itemVideoGame.setOnClickListener { onClickVideoGame(videoGame) }
         }

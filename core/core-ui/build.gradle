@@ -27,9 +27,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
+
+    implementation project(":core:core-model")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -44,4 +49,10 @@ dependencies {
     //Jetpack navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+
+    //Coil
+    implementation("io.coil-kt:coil:2.1.0")
+
+    //Shape
+    implementation("com.github.siyamed:android-shape-imageview:0.9.3")
 }

@@ -9,8 +9,9 @@ import coil.load
 import com.example.core_model.api.creator.CreatorItem
 import com.example.feature_main.databinding.ItemCreatorBinding
 
-internal class CreatorsAdapter
-    : PagingDataAdapter<CreatorItem, CreatorViewHolder>(CreatorItemDiffItemCallback) {
+internal class CreatorsAdapter(
+    private val onClickCreator:(CreatorItem?) -> Unit
+): PagingDataAdapter<CreatorItem, CreatorViewHolder>(CreatorItemDiffItemCallback) {
     override fun onBindViewHolder(holder: CreatorViewHolder, position: Int) {
 
         val creatorItem = getItem(position)
@@ -18,6 +19,8 @@ internal class CreatorsAdapter
         with(holder.binding){
             creatorPhoto.load(data = creatorItem?.image)
             creatorName.text = creatorItem?.name
+
+            this.creator.setOnClickListener { onClickCreator(creatorItem) }
         }
     }
 

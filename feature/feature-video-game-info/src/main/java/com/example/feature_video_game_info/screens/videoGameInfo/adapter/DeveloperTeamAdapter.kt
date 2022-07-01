@@ -10,8 +10,9 @@ import coil.load
 import com.example.core_model.api.creator.CreatorItem
 import com.example.feature_video_game_info.databinding.ItemDeveloperTeamBinding
 
-internal class DeveloperTeamAdapter
-    :PagingDataAdapter<CreatorItem, DeveloperTeamViewHolder>(DeveloperTeamDiffItemCallback) {
+internal class DeveloperTeamAdapter(
+  private val onClickDeveloperTeam:(CreatorItem?) -> Unit
+) :PagingDataAdapter<CreatorItem, DeveloperTeamViewHolder>(DeveloperTeamDiffItemCallback) {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DeveloperTeamViewHolder, position: Int) {
@@ -35,6 +36,8 @@ internal class DeveloperTeamAdapter
             developerTeamName.text = developerTeam?.name
             developerTeamGameCount.text = "Game count: ${developerTeam?.games_count ?: 0}"
             this.developerTeamPositions.text = developerTeamPositions
+
+            this.developerTeam.setOnClickListener { onClickDeveloperTeam(developerTeam) }
         }
     }
 

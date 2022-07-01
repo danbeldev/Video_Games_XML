@@ -2,6 +2,7 @@ package com.example.feature_video_game_info.screens.videoGameInfo
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -13,19 +14,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.core_common.extension.launchWhenStarted
 import com.example.core_common.extension.parseHtml
+import com.example.core_common.naigation.NavCommand
+import com.example.core_common.naigation.NavCommands
+import com.example.core_common.naigation.Screen
+import com.example.core_common.naigation.navigation
 import com.example.core_model.api.videoGame.Achievement
 import com.example.core_model.api.videoGame.Trailer
 import com.example.core_model.api.videoGame.VideoGameInfo
 import com.example.core_network_domain.response.Result
 import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_video_game_info.R
-import com.example.feature_video_game_info.screens.videoGameInfo.adapter.AchievementAdapter
-import com.example.feature_video_game_info.screens.videoGameInfo.adapter.DeveloperTeamAdapter
-import com.example.feature_video_game_info.screens.videoGameInfo.adapter.ScreenshotsAdapter
-import com.example.feature_video_game_info.screens.videoGameInfo.adapter.TrailerAdapter
 import com.example.feature_video_game_info.databinding.FragmentVideoGameInfoBinding
 import com.example.feature_video_game_info.di.GameInfoComponentViewModel
 import com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.AchievementAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.AdditionsHorizontalAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.DeveloperTeamAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.ScreenshotsAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.SeriesAdapter
+import com.example.feature_video_game_info.screens.videoGameInfo.adapter.TrailerAdapter
 import com.example.feature_video_game_info.screens.videoGameInfo.viewModel.VideoGameInfoViewModel
 import com.example.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment
 import dagger.Lazy
@@ -55,7 +62,51 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
     }
 
     private val developerTeamAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        DeveloperTeamAdapter()
+        DeveloperTeamAdapter(
+            onClickDeveloperTeam = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.Creator.arguments(it?.id ?: 0)),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
+            }
+        )
+    }
+
+    private val additionsAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        AdditionsHorizontalAdapter(
+            onClickAdditions = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.VideoGameInfo.arguments(it?.id ?: 0)),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
+            }
+        )
+    }
+
+    private val seriesAdapter by lazy(LazyThreadSafetyMode.NONE){
+        SeriesAdapter(
+            onClickSeries = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.VideoGameInfo.arguments(it?.id ?: 0)),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
+            }
+        )
     }
 
     override fun onAttach(context: Context) {
@@ -76,6 +127,12 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
         val developerTeamLayoutManager = LinearLayoutManager(this.context)
         developerTeamLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        val seriesLayoutManager = LinearLayoutManager(this.context)
+        seriesLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        val additionsLayoutManager = LinearLayoutManager(this.context)
+        additionsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         viewModel.getVideoGameInfo(videoGameId)
         viewModel.responseVideoGameInfo.onEach {
@@ -128,11 +185,33 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
             }
         }
 
+        lifecycleScope.launchWhenStarted {
+            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
+                viewModel.getAdditions(
+                    gamePk = videoGameId
+                ).collectLatest(additionsAdapter::submitData)
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
+                viewModel.getSeries(
+                    gamePk = videoGameId
+                ).collectLatest(seriesAdapter::submitData)
+            }
+        }
+
         binding.screenshots.adapter = screenshotsAdapter
         binding.screenshots.layoutManager = screenshotsLayoutManager
 
         binding.developerTeam.adapter = developerTeamAdapter
         binding.developerTeam.layoutManager = developerTeamLayoutManager
+
+        binding.series.adapter = seriesAdapter
+        binding.series.layoutManager = seriesLayoutManager
+
+        binding.additions.adapter = additionsAdapter
+        binding.additions.layoutManager = additionsLayoutManager
 
         binding.achievementName.setOnClickListener {
             findNavController().navigate(

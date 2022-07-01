@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_videoGameInfoFragment_to_achievementsFragment"
             app:destination="@id/achievementsFragment" />
+        <action
+            android:id="@+id/action_videoGameInfoFragment_self"
+            app:destination="@id/videoGameInfoFragment" />
 
     </fragment>
     <fragment

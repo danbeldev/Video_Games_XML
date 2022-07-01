@@ -9,7 +9,8 @@ interface GamesRepository {
     suspend fun getGames(
         page:Int,
         search:String?,
-        platforms:String?
+        platforms:String?,
+        creators:String?
     ):Response<VideoGame>
 
     suspend fun getGameInfo(
@@ -36,6 +37,11 @@ interface GamesRepository {
 
     suspend fun getSeries(
         gamePk:String,
+        page:Int
+    ):Response<VideoGame>
+
+    suspend fun getAdditions(
+        gamePk: String,
         page:Int
     ):Response<VideoGame>
 }

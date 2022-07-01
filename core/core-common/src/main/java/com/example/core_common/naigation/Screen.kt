@@ -14,4 +14,9 @@ sealed class Screen(val route:String){
             platformId:Int
         ):String = "${BASE_URL}platform/$platformId"
     }
+    object Creator:Screen("${BASE_URL}creator_info/{creator_id}"){
+        fun arguments(
+            creatorId:Int
+        ):String = "${BASE_URL}creator_info/$creatorId"
+    }
 }

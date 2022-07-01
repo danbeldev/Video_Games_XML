@@ -35,6 +35,7 @@ interface GameInfoDeps{
     val getDeveloperTeamUseCase:GetDeveloperTeamUseCase
     val getTrailerUseCase: GetTrailerUseCase
     val getSeriesUseCase: GetSeriesUseCase
+    val getAdditionsUseCase:GetAdditionsUseCase
 }
 
 interface GameInfoDepsProvider{

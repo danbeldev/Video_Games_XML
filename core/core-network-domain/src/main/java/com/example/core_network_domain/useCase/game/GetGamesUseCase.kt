@@ -12,12 +12,14 @@ class GetGamesUseCase @Inject constructor(
     suspend operator fun invoke(
         page:Int,
         search:String? = null,
-        platforms:String? = null
+        platforms:String? = null,
+        creators:String? = null
     ): Result<VideoGame> {
         return safeApiCall { gamesRepository.getGames(
             page = page,
             search = search,
-            platforms = platforms
+            platforms = platforms,
+            creators = creators
         ) }
     }
 }

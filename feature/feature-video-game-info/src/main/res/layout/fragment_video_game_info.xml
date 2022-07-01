@@ -152,6 +152,50 @@
                 app:layout_constraintTop_toBottomOf="@+id/achievement_name"
                 tools:ignore="MissingConstraints" />
 
+            <TextView
+                android:id="@+id/additions_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/additions_name"
+                android:textColor="@color/secondary_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/achievements" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/additions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/additions_name"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/series_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/series_name"
+                android:textColor="@color/secondary_background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/additions" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/series"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/series_name"
+                tools:ignore="MissingConstraints" />
+
             <com.github.siyamed.shapeimageview.RoundedImageView
                 android:id="@+id/reddit_logo"
                 android:layout_width="30dp"
@@ -159,7 +203,7 @@
                 android:layout_margin="5dp"
                 android:src="@drawable/reddit_logo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/achievements"
+                app:layout_constraintTop_toBottomOf="@+id/series"
                 app:siRadius="90dp"
                 tools:ignore="ContentDescription" />
 

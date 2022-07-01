@@ -17,10 +17,10 @@ import com.example.core_common.naigation.navigation
 import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_main.R
 import com.example.feature_main.screens.mainScreen.adapter.CreatorsAdapter
-import com.example.feature_main.screens.mainScreen.adapter.VideoGamesPagerAdapter
 import com.example.feature_main.databinding.FragmentMainBinding
 import com.example.feature_main.di.MainComponentViewModel
 import com.example.feature_main.screens.mainScreen.adapter.PlatformsAdapter
+import com.example.feature_main.screens.mainScreen.adapter.VideoGamesHorizontalAdapter
 import com.example.feature_main.screens.mainScreen.viewModel.MainViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
@@ -36,7 +36,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private val videoGamesAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        VideoGamesPagerAdapter { id ->
+        VideoGamesHorizontalAdapter { id ->
             navigation(
                 NavCommand(
                     NavCommands.DeepLink(
@@ -68,7 +68,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private val creatorsAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        CreatorsAdapter()
+        CreatorsAdapter(
+            onClickCreator = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.Creator.arguments(it?.id ?: 0)),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
+            }
+        )
     }
 
     override fun onAttach(context: Context) {

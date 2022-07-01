@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message">Message</string>
+    <string name="creator_description"><![CDATA[Gabe Newell is a games director, producer and programmer. Newell has been working with Valve Software, NVIDIA Lightspeed Studios, Gearbox Software and Turtle Rock Studios. Newell&#39;s first published game was Half-Life released in 1998. Next, Gabe Newell worked on Half-Life: Opposing Force taking on the role of director. Later, Newell also was part of the team who developed Gunman Chronicles published by Sierra On-Line for PC. Most lately, Gabe Newell worked on Dota Underlords.]]></string>
+    <string name="creator_positions">Director, Producer, Programmer</string>
+    <string name="creator_name">Gabe Newell</string>
+    <string name="video_games_name">Video games</string>
+</resources>

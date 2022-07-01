@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/core/core-network-domain" />
             <option value="$PROJECT_DIR$/core/core-ui" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/feature-creator-info" />
             <option value="$PROJECT_DIR$/feature/feature-main" />
             <option value="$PROJECT_DIR$/feature/feature-platform-info" />
             <option value="$PROJECT_DIR$/feature/feature-video-game-info" />

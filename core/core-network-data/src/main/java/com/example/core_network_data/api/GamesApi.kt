@@ -5,6 +5,7 @@ import com.example.core_model.api.videoGame.*
 import com.example.core_network_data.common.ConstantsUrl.GAMES_ACHIEVEMENTS_URL
 import com.example.core_network_data.common.ConstantsUrl.GAMES_SCREENSHOT_URL
 import com.example.core_network_data.common.ConstantsUrl.GAMES_URL
+import com.example.core_network_data.common.ConstantsUrl.GAME_ADDITIONS_URL
 import com.example.core_network_data.common.ConstantsUrl.GAME_DEVELOPER_TEAM_URL
 import com.example.core_network_data.common.ConstantsUrl.GAME_SERIES_URL
 import com.example.core_network_data.common.ConstantsUrl.GAME_TRAILER_URL
@@ -22,7 +23,8 @@ interface GamesApi {
         @Query("page") page:Int,
         @Query("page_size") page_size:Int = 20,
         @Query("search") search:String?,
-        @Query("platforms") platforms:String?
+        @Query("platforms") platforms:String?,
+        @Query("creators") creators:String?
     ):Response<VideoGame>
 
     @GET("$GAMES_URL/{id}")
@@ -61,6 +63,14 @@ interface GamesApi {
 
     @GET(GAME_SERIES_URL)
     suspend fun getSeries(
+        @Path("game_pk") gamePk: String,
+        @Query("page") page:Int,
+        @Query("page_size") pageSize: Int = 20,
+        @Query("key") key: String = RAWQ_KEY
+    ):Response<VideoGame>
+
+    @GET(GAME_ADDITIONS_URL)
+    suspend fun getAdditions(
         @Path("game_pk") gamePk: String,
         @Query("page") page:Int,
         @Query("page_size") pageSize: Int = 20,

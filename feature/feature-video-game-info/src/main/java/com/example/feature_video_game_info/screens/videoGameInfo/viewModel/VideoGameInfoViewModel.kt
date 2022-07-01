@@ -10,6 +10,7 @@ import androidx.paging.cachedIn
 import com.example.core_model.api.creator.CreatorItem
 import com.example.core_model.api.videoGame.*
 import com.example.core_network_domain.response.Result
+import com.example.core_network_domain.source.AdditionsPagingSource
 import com.example.core_network_domain.source.DeveloperTeamPageSource
 import com.example.core_network_domain.source.SeriesPagingSource
 import com.example.core_network_domain.source.VideoGameScreenshots
@@ -23,7 +24,8 @@ internal class VideoGameInfoViewModel (
     private val getScreenshotsUseCase: GetScreenshotsUseCase,
     private val getDeveloperTeamUseCase:GetDeveloperTeamUseCase,
     private val getTrailerUseCase: GetTrailerUseCase,
-    private val getSeriesUseCase: GetSeriesUseCase
+    private val getSeriesUseCase: GetSeriesUseCase,
+    private val getAdditionsUseCase:GetAdditionsUseCase
 ) : ViewModel() {
 
     private val _responseVideoGameInfo:MutableStateFlow<Result<VideoGameInfo>> =
@@ -68,17 +70,26 @@ internal class VideoGameInfoViewModel (
         }.flow.cachedIn(viewModelScope)
     }
 
+    fun getAdditions(gamePk: Int):Flow<PagingData<VideoGameItem>>{
+        return Pager(PagingConfig(pageSize = 20)){
+            AdditionsPagingSource(
+                getAdditionsUseCase = getAdditionsUseCase,
+                gamePk = gamePk.toString()
+            )
+        }.flow.cachedIn(viewModelScope)
+    }
+
     fun getTrailer(id: Int){
         getTrailerUseCase.invoke(id).onEach {
             _responseTrailer.value = it
         }.launchIn(viewModelScope)
     }
 
-    fun getSeries(gamePk:String): Flow<PagingData<VideoGameItem>> {
+    fun getSeries(gamePk:Int): Flow<PagingData<VideoGameItem>> {
         return Pager(PagingConfig(pageSize = 20)){
             SeriesPagingSource(
                 getSeriesUseCase = getSeriesUseCase,
-                gamePk = gamePk
+                gamePk = gamePk.toString()
             )
         }.flow.cachedIn(viewModelScope)
     }
@@ -89,7 +100,8 @@ internal class VideoGameInfoViewModel (
         private val getScreenshotsUseCase:GetScreenshotsUseCase,
         private val getDeveloperTeamUseCase: GetDeveloperTeamUseCase,
         private val getTrailerUseCase: GetTrailerUseCase,
-        private val getSeriesUseCase: GetSeriesUseCase
+        private val getSeriesUseCase: GetSeriesUseCase,
+        private val getAdditionsUseCase:GetAdditionsUseCase
     ):ViewModelProvider.Factory{
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -100,7 +112,8 @@ internal class VideoGameInfoViewModel (
                 getScreenshotsUseCase = getScreenshotsUseCase,
                 getDeveloperTeamUseCase = getDeveloperTeamUseCase,
                 getTrailerUseCase = getTrailerUseCase,
-                getSeriesUseCase = getSeriesUseCase
+                getSeriesUseCase = getSeriesUseCase,
+                getAdditionsUseCase = getAdditionsUseCase
             ) as T
         }
     }

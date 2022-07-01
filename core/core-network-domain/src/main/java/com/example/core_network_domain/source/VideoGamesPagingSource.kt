@@ -9,7 +9,8 @@ import com.example.core_network_domain.useCase.game.GetGamesUseCase
 class VideoGamesPagingSource(
     private val getGamesUseCase: GetGamesUseCase,
     private val search:String? = null,
-    private val platforms:String? = null
+    private val platforms:String? = null,
+    private val creators:String? = null
 ):PagingSource<Int, VideoGameItem>() {
     override fun getRefreshKey(state: PagingState<Int, VideoGameItem>): Int? {
         return state.anchorPosition
@@ -23,7 +24,8 @@ class VideoGamesPagingSource(
             when(val videoGameItem = getGamesUseCase.invoke(
                 page = page,
                 search = search,
-                platforms = platforms
+                platforms = platforms,
+                creators = creators
             )){
                 is Result.Error -> LoadResult.Error(Exception(videoGameItem.message))
                 is Result.Loading -> LoadResult.Invalid()

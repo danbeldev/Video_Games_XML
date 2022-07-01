@@ -46,6 +46,7 @@ dependencies {
     implementation project(":feature:feature-main")
     implementation project(":feature:feature-video-game-info")
     implementation project(":feature:feature-platform-info")
+    implementation project(":feature:feature-creator-info")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

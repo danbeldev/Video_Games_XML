@@ -1,6 +1,7 @@
 package com.example.videogames
 
 import android.app.Application
+import com.example.feature_creator_info.di.CreatorDepsStore
 import com.example.feature_main.di.MainDepsStore
 import com.example.feature_platform_info.di.PlatformDepsStore
 import com.example.feature_video_game_info.di.GameInfoDepsStore
@@ -21,5 +22,7 @@ class VideoGamesApp:Application() {
         GameInfoDepsStore.deps = appComponent
 
         PlatformDepsStore.deps = appComponent
+
+        CreatorDepsStore.deps = appComponent
     }
 }

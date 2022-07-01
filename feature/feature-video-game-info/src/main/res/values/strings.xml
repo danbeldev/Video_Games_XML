@@ -21,4 +21,6 @@
     <string name="trailer_name">Trailers</string>
     <string name="trailer_title">Cuphead Announcement Trailer (2017)</string>
     <string name="achievement_percent">24 %</string>
+    <string name="series_name">Series</string>
+    <string name="additions_name">Additions</string>
 </resources>

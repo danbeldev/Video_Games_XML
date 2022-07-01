@@ -5,21 +5,20 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/card_shape">
+    android:background="@color/primary_background">
 
     <com.github.siyamed.shapeimageview.RoundedImageView
         android:id="@+id/video_game_image"
-        android:layout_width="200dp"
-        android:layout_height="130dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:src="@drawable/video_game_background_image"
         app:siRadius="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/video_game_title"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="@string/video_game_title"
@@ -29,18 +28,8 @@
         android:lines="1"
         android:ellipsize="end"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/video_game_image"/>
-
-    <TextView
-        android:id="@+id/video_game_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/video_game_rating"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/video_game_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

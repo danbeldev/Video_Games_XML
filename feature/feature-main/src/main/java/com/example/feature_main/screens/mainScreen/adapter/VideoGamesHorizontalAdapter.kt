@@ -9,7 +9,7 @@ import coil.load
 import com.example.core_model.api.videoGame.VideoGameItem
 import com.example.feature_main.databinding.ItemVideoGameHorizontalBinding
 
-internal class VideoGamesPagerAdapter(
+internal class VideoGamesHorizontalAdapter(
     private val onClickVideoGame:(Int) -> Unit
 ) : PagingDataAdapter<VideoGameItem, VideoGamesViewHolder>(VideoGameItemDiffItemCallback) {
     override fun onBindViewHolder(holder: VideoGamesViewHolder, position: Int) {
