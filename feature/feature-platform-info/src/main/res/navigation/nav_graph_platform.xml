@@ -15,6 +15,13 @@
         <argument
             android:name="platform_id"
             app:argType="integer"/>
+        <action
+            android:id="@+id/action_platformInfoFragment_to_platformVideoGamesFragment"
+            app:destination="@id/platformVideoGamesFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/platformVideoGamesFragment"
+        android:name="com.example.feature_platform_info.screens.platformVideoGames.PlatformVideoGamesFragment"
+        android:label="PlatformVideoGamesFragment" />
 </navigation>

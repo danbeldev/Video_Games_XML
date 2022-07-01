@@ -6,18 +6,12 @@ import com.example.core_network_domain.response.BaseApiResponse
 import com.example.core_network_domain.response.Result
 import javax.inject.Inject
 
-class GetGamesUseCase @Inject constructor(
+class GetSeriesUseCase @Inject constructor(
     private val gamesRepository: GamesRepository
 ):BaseApiResponse() {
+
     suspend operator fun invoke(
-        page:Int,
-        search:String? = null,
-        platforms:String? = null
-    ): Result<VideoGame> {
-        return safeApiCall { gamesRepository.getGames(
-            page = page,
-            search = search,
-            platforms = platforms
-        ) }
-    }
+        gamePk:String,
+        page:Int
+    ):Result<VideoGame> = safeApiCall { gamesRepository.getSeries(gamePk, page) }
 }

@@ -14,14 +14,19 @@
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/fragment_blank.xml" value="0.1213768115942029" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/fragment_main.xml" value="0.18" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/fragment_video_games.xml" value="0.18" />
-        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_creator.xml" value="0.1" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_creator.xml" value="0.5" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_platform.xml" value="0.33" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_video_game.xml" value="0.38333333333333336" />
-        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_video_game_horizontal.xml" value="0.1255666364460562" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_video_game_horizontal.xml" value="0.2" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/item_video_game_vertical.xml" value="0.5" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/layout/video_games_header_navigation_drawer.xml" value="0.25" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-main/src/main/res/menu/video_games_top_app_bar.xml" value="0.2" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-platform-info/src/main/res/layout/fragment_platform_info.xml" value="0.25" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-platform-info/src/main/res/layout/fragment_platform_video_games.xml" value="0.1214868540344515" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-platform-info/src/main/res/layout/item_platform_video_game_horizontal.xml" value="0.1214868540344515" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-platform-info/src/main/res/layout/item_platform_video_game_vertical.xml" value="0.5" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-platform-info/src/main/res/layout/item_video_game_horizontal.xml" value="0.33" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-platform-info/src/main/res/layout/item_video_game_vertical.xml" value="0.1214868540344515" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/drawable/ic_play.xml" value="0.1995" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/drawable/schape.xml" value="0.1615" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/fragment_achievements.xml" value="0.1214868540344515" />
@@ -32,6 +37,7 @@
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_developer_team.xml" value="0.33" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_screenshots.xml" value="0.6155555555555555" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_trailer.xml" value="0.33" />
+        <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_video_game_serie.xml" value="0.5" />
         <entry key="..\:/Users/danbe/AndroidStudioProjects/VideoGames/feature/feature-video-game-info/src/main/res/layout/item_video_player_trailer.xml" value="0.2" />
       </map>
     </option>

@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/achievement"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="128dp"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    android:background="@drawable/card_shape">
+    android:layout_margin="15dp"
+    android:background="@color/primary_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.github.siyamed.shapeimageview.RoundedImageView
         android:id="@+id/achievement_image"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_margin="5dp"
-        app:siRadius="10dp"
+        app:siRadius="15dp"
         android:src="@drawable/achievement_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/achievement_title"
@@ -28,22 +24,11 @@
         android:text="@string/achievement_title"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/achievement_image"
-        app:layout_constraintStart_toStartOf="@id/achievement_image"
-        app:layout_constraintEnd_toEndOf="@+id/achievement_image"/>
-
-    <TextView
-        android:id="@+id/achievement_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/achievement_description"
-        android:textColor="@color/white"
-        android:textStyle="normal"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/achievement_title"
-        app:layout_constraintStart_toStartOf="@id/achievement_title"
-        app:layout_constraintEnd_toEndOf="@+id/achievement_title"/>
+        android:textSize="16sp"
+        android:lines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievement_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

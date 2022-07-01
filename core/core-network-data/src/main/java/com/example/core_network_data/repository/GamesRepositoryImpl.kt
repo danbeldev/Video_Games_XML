@@ -13,11 +13,13 @@ class GamesRepositoryImpl @Inject constructor(
 
     override suspend fun getGames(
         page: Int,
-        search: String?
+        search: String?,
+        platforms:String?
     ): Response<VideoGame> {
         return gamesApi.getGames(
             page = page,
-            search = search
+            search = search,
+            platforms = platforms
         )
     }
 
@@ -39,5 +41,9 @@ class GamesRepositoryImpl @Inject constructor(
 
     override suspend fun getTrailer(id: Int): Response<Trailer> {
         return gamesApi.getTrailer(id = id)
+    }
+
+    override suspend fun getSeries(gamePk: String, page: Int): Response<VideoGame> {
+        return gamesApi.getSeries(gamePk = gamePk, page = page)
     }
 }

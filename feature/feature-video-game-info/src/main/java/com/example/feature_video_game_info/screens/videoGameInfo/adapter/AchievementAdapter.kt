@@ -26,7 +26,6 @@ internal class AchievementAdapter(
         with(holder.binding){
             achievementImage.load(achievement.image)
             achievementTitle.text = "${achievement.name}, ${achievement.percent}"
-            achievementDescription.text = achievement.description
             this.achievement.setOnClickListener { onClickAchievement(achievement) }
         }
     }

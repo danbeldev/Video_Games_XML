@@ -31,6 +31,8 @@ interface AppComponent: MainDeps, GameInfoDeps, PlatformDeps {
     override val getPlatformUseCase: GetPlatformUseCase
 
     override val getPlatformByIdUseCase: GetPlatformByIdUseCase
+
+    override val getSeriesUseCase: GetSeriesUseCase
 }
 
 @Scope

@@ -8,12 +8,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core_model.api.creator.CreatorItem
-import com.example.core_model.api.videoGame.Achievement
-import com.example.core_model.api.videoGame.ScreenshotItem
-import com.example.core_model.api.videoGame.Trailer
-import com.example.core_model.api.videoGame.VideoGameInfo
+import com.example.core_model.api.videoGame.*
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.source.DeveloperTeamPageSource
+import com.example.core_network_domain.source.SeriesPagingSource
 import com.example.core_network_domain.source.VideoGameScreenshots
 import com.example.core_network_domain.useCase.game.*
 import kotlinx.coroutines.flow.*
@@ -24,7 +22,8 @@ internal class VideoGameInfoViewModel (
     private val getAchievementsUseCase: GetAchievementsUseCase,
     private val getScreenshotsUseCase: GetScreenshotsUseCase,
     private val getDeveloperTeamUseCase:GetDeveloperTeamUseCase,
-    private val getTrailerUseCase: GetTrailerUseCase
+    private val getTrailerUseCase: GetTrailerUseCase,
+    private val getSeriesUseCase: GetSeriesUseCase
 ) : ViewModel() {
 
     private val _responseVideoGameInfo:MutableStateFlow<Result<VideoGameInfo>> =
@@ -75,12 +74,22 @@ internal class VideoGameInfoViewModel (
         }.launchIn(viewModelScope)
     }
 
+    fun getSeries(gamePk:String): Flow<PagingData<VideoGameItem>> {
+        return Pager(PagingConfig(pageSize = 20)){
+            SeriesPagingSource(
+                getSeriesUseCase = getSeriesUseCase,
+                gamePk = gamePk
+            )
+        }.flow.cachedIn(viewModelScope)
+    }
+
     class Factory @Inject constructor(
         private val getGameInfoUseCase: GetGameInfoUseCase,
         private val getAchievementsUseCase: GetAchievementsUseCase,
         private val getScreenshotsUseCase:GetScreenshotsUseCase,
         private val getDeveloperTeamUseCase: GetDeveloperTeamUseCase,
-        private val getTrailerUseCase: GetTrailerUseCase
+        private val getTrailerUseCase: GetTrailerUseCase,
+        private val getSeriesUseCase: GetSeriesUseCase
     ):ViewModelProvider.Factory{
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -90,7 +99,8 @@ internal class VideoGameInfoViewModel (
                 getAchievementsUseCase = getAchievementsUseCase,
                 getScreenshotsUseCase = getScreenshotsUseCase,
                 getDeveloperTeamUseCase = getDeveloperTeamUseCase,
-                getTrailerUseCase = getTrailerUseCase
+                getTrailerUseCase = getTrailerUseCase,
+                getSeriesUseCase = getSeriesUseCase
             ) as T
         }
     }
