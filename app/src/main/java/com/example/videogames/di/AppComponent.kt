@@ -6,6 +6,7 @@ import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.*
 import com.example.core_network_domain.useCase.platform.GetPlatformByIdUseCase
 import com.example.core_network_domain.useCase.platform.GetPlatformUseCase
+import com.example.core_network_domain.useCase.store.GetStoresUseCase
 import com.example.feature_creator_info.di.CreatorDeps
 import com.example.feature_main.di.MainDeps
 import com.example.feature_platform_info.di.PlatformDeps
@@ -31,6 +32,8 @@ interface AppComponent: MainDeps, GameInfoDeps, PlatformDeps, CreatorDeps {
     override val getTrailerUseCase: GetTrailerUseCase
 
     override val getPlatformUseCase: GetPlatformUseCase
+
+    override val getStoresUseCase: GetStoresUseCase
 
     override val getPlatformByIdUseCase: GetPlatformByIdUseCase
 

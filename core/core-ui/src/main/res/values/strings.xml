@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="video_game_title">Far cry 5</string>
+    <string name="person_name">Gabe Newell</string>
+    <string name="person_positions">Director, Producer, Programmer</string>
+    <string name="person_games_count_text">Known for</string>
+    <string name="person_games_count">24</string>
+    <string name="store_video_game_one_text">Grand Theft Auto V</string>
+    <string name="store_video_game_one_count">17,614</string>
+    <string name="store_video_game_two_text">The Witcher 3: Wild Hunt</string>
+    <string name="store_video_game_two_count">16,386</string>
+    <string name="store_video_game_three_text">Portal 2</string>
+    <string name="store_video_game_three_count">15,418</string>
 </resources>

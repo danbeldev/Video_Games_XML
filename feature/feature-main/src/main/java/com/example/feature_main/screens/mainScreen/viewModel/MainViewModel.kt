@@ -10,18 +10,29 @@ import androidx.paging.cachedIn
 import com.example.core_model.api.videoGame.VideoGameItem
 import com.example.core_network_domain.source.CreatorsPagingSource
 import com.example.core_network_domain.source.PlatformPagingSource
+import com.example.core_network_domain.source.StoresPagingSource
 import com.example.core_network_domain.source.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.core_network_domain.useCase.platform.GetPlatformUseCase
+import com.example.core_network_domain.useCase.store.GetStoresUseCase
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 internal class MainViewModel(
     private val getGamesUseCase: GetGamesUseCase,
     private val getCreatorsUseCase: GetCreatorsUseCase,
-    private val getPlatformPagingSource:GetPlatformUseCase
+    private val getPlatformPagingSource:GetPlatformUseCase,
+    private val getStoresUseCase: GetStoresUseCase
 ) : ViewModel() {
+
+    val stores = Pager(
+        PagingConfig(pageSize = 20)
+    ){
+        StoresPagingSource(
+            getStoresUseCase = getStoresUseCase
+        )
+    }.flow.cachedIn(viewModelScope)
 
     val platforms = Pager(
         PagingConfig(pageSize = 20)
@@ -50,7 +61,8 @@ internal class MainViewModel(
     class Factor @Inject constructor(
         private val getGamesUseCase: GetGamesUseCase,
         private val getCreatorsUseCase: GetCreatorsUseCase,
-        private val getPlatformPagingSource: GetPlatformUseCase
+        private val getPlatformPagingSource: GetPlatformUseCase,
+        private val getStoresUseCase: GetStoresUseCase
     ): ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -58,7 +70,8 @@ internal class MainViewModel(
             return MainViewModel(
                 getGamesUseCase,
                 getCreatorsUseCase,
-                getPlatformPagingSource
+                getPlatformPagingSource,
+                getStoresUseCase
             ) as T
         }
     }

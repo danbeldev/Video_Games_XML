@@ -3,12 +3,15 @@ package com.example.videogames.di
 import com.example.core_network_data.api.CreatorApi
 import com.example.core_network_data.api.GamesApi
 import com.example.core_network_data.api.PlatformApi
+import com.example.core_network_data.api.StoreApi
 import com.example.core_network_data.repository.CreatorRepositoryImpl
 import com.example.core_network_data.repository.GamesRepositoryImpl
 import com.example.core_network_data.repository.PlatformRepositoryImpl
+import com.example.core_network_data.repository.StoreRepositoryImpl
 import com.example.core_network_domain.repository.CreatorRepository
 import com.example.core_network_domain.repository.GamesRepository
 import com.example.core_network_domain.repository.PlatformRepository
+import com.example.core_network_domain.repository.StoreRepository
 import com.example.videogames.common.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -17,6 +20,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class ApiModule {
+
+    @[Provides AppScope]
+    fun providerStoreRepository(
+        storeApi: StoreApi
+    ):StoreRepository = StoreRepositoryImpl(
+        storeApi = storeApi
+    )
+
+    @[Provides AppScope]
+    fun providerStoreApi(
+        retrofit: Retrofit
+    ):StoreApi = retrofit.create(StoreApi::class.java)
 
     @[Provides AppScope]
     fun providerPlatformRepository(

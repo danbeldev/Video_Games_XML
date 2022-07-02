@@ -46,4 +46,3 @@ private object PlatformDiffItemCallback : DiffUtil.ItemCallback<PlatformItem>() 
         return oldItem.name == newItem.name && oldItem.image == newItem.image
     }
 }
-

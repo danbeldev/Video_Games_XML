@@ -13,3 +13,15 @@ fun String.parseHtml():String{
         Html.fromHtml(this).toString()
     }
 }
+
+fun String?.replaceRange(int: Int):String{
+    this?.let {
+        if (this.length < int)
+            return this
+        return this.replaceRange(
+            int until this.length,
+            "..."
+        )
+    }
+    return ""
+}

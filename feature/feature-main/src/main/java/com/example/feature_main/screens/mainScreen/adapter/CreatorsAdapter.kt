@@ -5,22 +5,50 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.example.core_common.extension.replaceRange
+import com.example.core_model.api.creator.CreatorGameItem
 import com.example.core_model.api.creator.CreatorItem
 import com.example.feature_main.databinding.ItemCreatorBinding
 
 internal class CreatorsAdapter(
-    private val onClickCreator:(CreatorItem?) -> Unit
+    private val onClickCreator:(CreatorItem?) -> Unit,
+    private val onClickVideoGame:(CreatorGameItem?) -> Unit
 ): PagingDataAdapter<CreatorItem, CreatorViewHolder>(CreatorItemDiffItemCallback) {
     override fun onBindViewHolder(holder: CreatorViewHolder, position: Int) {
 
         val creatorItem = getItem(position)
 
-        with(holder.binding){
-            creatorPhoto.load(data = creatorItem?.image)
-            creatorName.text = creatorItem?.name
+        with(holder.binding.creator){
 
-            this.creator.setOnClickListener { onClickCreator(creatorItem) }
+            setImageBackground(data = creatorItem?.image_background)
+            setPersonPhoto(data = creatorItem?.image)
+
+            personName(creatorItem?.name ?: "")
+
+            personPositions(creatorItem?.positions?.map { it.name })
+            gamesCount((creatorItem?.games_count ?: 0).toString())
+
+            creatorItem?.games?.get(0)?.let { item ->
+                videoGameOneText(text = item.name.replaceRange(25))
+                videoGameOneCount(text = (item.added ?: 0).toString())
+                onVideoGameOneClick { onClickVideoGame(item) }
+            }
+
+            creatorItem?.games?.get(1)?.let { item ->
+                videoGameTwoText(text = item.name.replaceRange(25))
+                videoGameTwoCount(text = (item.added ?: 0).toString())
+
+                onVideoGameTwoClick { onClickVideoGame(item) }
+            }
+
+            creatorItem?.games?.get(2)?.let { item ->
+                videoGameThreeText(text = item.name.replaceRange(25))
+                videoGameThreeCount(text = (item.added ?: 0).toString())
+
+                onVideoGameThreeClick { onClickVideoGame(item) }
+            }
+
+            setOnClickListener { onClickCreator(creatorItem) }
         }
     }
 

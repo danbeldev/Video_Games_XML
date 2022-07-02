@@ -20,6 +20,7 @@ import com.example.feature_main.screens.mainScreen.adapter.CreatorsAdapter
 import com.example.feature_main.databinding.FragmentMainBinding
 import com.example.feature_main.di.MainComponentViewModel
 import com.example.feature_main.screens.mainScreen.adapter.PlatformsAdapter
+import com.example.feature_main.screens.mainScreen.adapter.StoresAdapter
 import com.example.feature_main.screens.mainScreen.adapter.VideoGamesHorizontalAdapter
 import com.example.feature_main.screens.mainScreen.viewModel.MainViewModel
 import dagger.Lazy
@@ -79,6 +80,40 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         )
                     )
                 )
+            },
+            onClickVideoGame = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.VideoGameInfo.arguments(
+                                videoGameId = it?.id ?: 0
+                            )),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
+            }
+        )
+    }
+
+    private val storesAdapter by lazy(LazyThreadSafetyMode.NONE){
+        StoresAdapter(
+            onClickStore = {
+
+            },
+            onClickVideoGame = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.VideoGameInfo.arguments(
+                                videoGameId = it?.id ?: 0
+                            )),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
             }
         )
     }
@@ -96,6 +131,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val videoGameLayoutManager = LinearLayoutManager(this.context)
         val creatorLayoutManager = LinearLayoutManager(this.context)
         val platformLayoutManager = LinearLayoutManager(this.context)
+        val storesLayoutManager = LinearLayoutManager(this.context)
 
         lifecycleScope.launchWhenCreated {
             lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
@@ -115,19 +151,26 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }
 
-        binding.platformRecyclerView.adapter = platformAdapter
+        lifecycleScope.launchWhenCreated {
+            lifecycle.whenStateAtLeast(Lifecycle.State.CREATED){
+                viewModel.stores.collectLatest(storesAdapter::submitData)
+            }
+        }
 
+        binding.platformRecyclerView.adapter = platformAdapter
         binding.videoGamesRecyclerView.adapter = videoGamesAdapter
         binding.creatorsRecyclerView.adapter = creatorsAdapter
+        binding.storeRecyclerView.adapter = storesAdapter
 
-//            GridLayoutManager(this.context, 2)
         videoGameLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         creatorLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         platformLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        storesLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         binding.videoGamesRecyclerView.layoutManager = videoGameLayoutManager
         binding.creatorsRecyclerView.layoutManager = creatorLayoutManager
         binding.platformRecyclerView.layoutManager = platformLayoutManager
+        binding.storeRecyclerView.layoutManager = storesLayoutManager
 
         binding.videoGamesText.setOnClickListener {
             findNavController().navigate(

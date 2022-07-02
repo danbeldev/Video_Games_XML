@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PersonInfoView">
+        <attr name="src_image_background" format="reference" />
+        <attr name="src_person_photo" format="reference" />
+
+        <attr name="person_name" format="string" />
+        <attr name="person_positions" format="string" />
+
+        <attr name="games_count" format="string" />
+
+        <attr name="video_game_one_text" format="string" />
+        <attr name="video_game_one_count" format="string" />
+
+        <attr name="video_game_two_text" format="string" />
+        <attr name="video_game_two_count" format="string" />
+
+        <attr name="video_game_three_text" format="string"/>
+        <attr name="video_game_three_count" format="string" />
+    </declare-styleable>
+</resources>
