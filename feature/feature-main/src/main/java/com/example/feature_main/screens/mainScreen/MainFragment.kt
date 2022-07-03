@@ -64,6 +64,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         )
                     )
                 )
+            },
+            onClickGame = {
+                navigation(
+                    NavCommand(
+                        NavCommands.DeepLink(
+                            url = Uri.parse(Screen.VideoGameInfo.arguments(
+                                videoGameId = it?.id ?: 0
+                            )),
+                            isModal = true,
+                            isSingleTop = false
+                        )
+                    )
+                )
             }
         )
     }

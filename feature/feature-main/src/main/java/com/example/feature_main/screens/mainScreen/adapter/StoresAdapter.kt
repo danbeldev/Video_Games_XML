@@ -1,12 +1,11 @@
 package com.example.feature_main.screens.mainScreen.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.example.core_common.extension.replaceRange
 import com.example.core_model.api.store.StoreGame
 import com.example.core_model.api.store.StoreItem
 import com.example.feature_main.databinding.ItemStoreBinding
@@ -19,45 +18,40 @@ internal class StoresAdapter(
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         val store = getItem(position)
 
-        with(holder.binding){
-            storeName.text = store?.name
-            storeImageBackground.load(store?.image_background)
-            popularItemsCount.text = (store?.games_count ?: 0 ).toString()
+        with(holder.binding.store){
+            setImageBackground(data = store?.image_background)
 
-            this.store.setOnClickListener { onClickStore(store) }
+            title(store?.name ?: "")
 
-            videoGameOneText.visibility = View.GONE
-            videoGameOneCount.visibility = View.GONE
+            gamesCount((store?.games_count ?: 0).toString())
 
-            videoGameTwoText.visibility = View.GONE
-            videoGameTwoCount.visibility = View.GONE
+            store?.games?.let {
+                if (store.games.lastIndex >= 0){
+                    val item = store.games[0]
+                    videoGameOneText(text = item.name.replaceRange(25))
+                    videoGameOneCount(text = (item.added ?: 0).toString())
+                    onVideoGameOneClick { onClickVideoGame(item) }
+                }
 
-            videoGameThreeText.visibility = View.GONE
-            videoGameThreeCount.visibility = View.GONE
+                if (store.games.lastIndex >= 1){
+                    val item = store.games[1]
+                    videoGameTwoText(text = item.name.replaceRange(25))
+                    videoGameTwoCount(text = (item.added ?: 0).toString())
 
-            store?.games?.get(0)?.let { game ->
-                videoGameOneText.visibility = View.VISIBLE
-                videoGameOneCount.visibility = View.VISIBLE
+                    onVideoGameTwoClick { onClickVideoGame(item) }
+                }
 
-                videoGameOneCount.text = game.added.toString()
-                videoGameOneText.setOnClickListener { onClickVideoGame(game) }
+                if (store.games.lastIndex >= 2){
+                    val item = store.games[2]
+
+                    videoGameThreeText(text = item.name.replaceRange(25))
+                    videoGameThreeCount(text = (item.added ?: 0).toString())
+
+                    onVideoGameThreeClick { onClickVideoGame(item) }
+                }
             }
 
-            store?.games?.get(1)?.let { game ->
-                videoGameTwoText.visibility = View.VISIBLE
-                videoGameTwoCount.visibility = View.VISIBLE
-
-                videoGameTwoCount.text = game.added.toString()
-                videoGameTwoText.setOnClickListener { onClickVideoGame(game) }
-            }
-
-            store?.games?.get(2)?.let { game ->
-                videoGameThreeText.visibility = View.VISIBLE
-                videoGameThreeCount.visibility = View.VISIBLE
-
-                videoGameThreeCount.text = game.added.toString()
-                videoGameThreeText.setOnClickListener { onClickVideoGame(game) }
-            }
+            setOnClickListener { onClickStore(store) }
         }
     }
 

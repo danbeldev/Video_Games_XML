@@ -22,5 +22,5 @@ data class PlatformGame(
     val id:Int,
     val slug:String,
     val name:String,
-    val added:Int
+    val added:Int?
 )

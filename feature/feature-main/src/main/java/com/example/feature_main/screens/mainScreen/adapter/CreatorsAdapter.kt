@@ -28,24 +28,30 @@ internal class CreatorsAdapter(
             personPositions(creatorItem?.positions?.map { it.name })
             gamesCount((creatorItem?.games_count ?: 0).toString())
 
-            creatorItem?.games?.get(0)?.let { item ->
-                videoGameOneText(text = item.name.replaceRange(25))
-                videoGameOneCount(text = (item.added ?: 0).toString())
-                onVideoGameOneClick { onClickVideoGame(item) }
-            }
+            creatorItem?.games?.let {
+                if (creatorItem.games.lastIndex >= 0){
+                    val item = creatorItem.games[0]
+                    videoGameOneText(text = item.name.replaceRange(25))
+                    videoGameOneCount(text = (item.added ?: 0).toString())
+                    onVideoGameOneClick { onClickVideoGame(item) }
+                }
 
-            creatorItem?.games?.get(1)?.let { item ->
-                videoGameTwoText(text = item.name.replaceRange(25))
-                videoGameTwoCount(text = (item.added ?: 0).toString())
+                if (creatorItem.games.lastIndex >= 1){
+                    val item = creatorItem.games[1]
+                    videoGameTwoText(text = item.name.replaceRange(25))
+                    videoGameTwoCount(text = (item.added ?: 0).toString())
 
-                onVideoGameTwoClick { onClickVideoGame(item) }
-            }
+                    onVideoGameTwoClick { onClickVideoGame(item) }
+                }
 
-            creatorItem?.games?.get(2)?.let { item ->
-                videoGameThreeText(text = item.name.replaceRange(25))
-                videoGameThreeCount(text = (item.added ?: 0).toString())
+                if (creatorItem.games.lastIndex >= 2){
+                    val item = creatorItem.games[2]
 
-                onVideoGameThreeClick { onClickVideoGame(item) }
+                    videoGameThreeText(text = item.name.replaceRange(25))
+                    videoGameThreeCount(text = (item.added ?: 0).toString())
+
+                    onVideoGameThreeClick { onClickVideoGame(item) }
+                }
             }
 
             setOnClickListener { onClickCreator(creatorItem) }
