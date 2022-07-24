@@ -67,7 +67,7 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
                 navigation(
                     NavCommand(
                         NavCommands.DeepLink(
-                            url = Uri.parse(Screen.Creator.arguments(it?.id ?: 0)),
+                            url = Uri.parse(Screen.CreatorInfo.arguments(it?.id ?: 0)),
                             isModal = true,
                             isSingleTop = false
                         )

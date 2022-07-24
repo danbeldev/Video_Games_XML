@@ -14,9 +14,14 @@ sealed class Screen(val route:String){
             platformId:Int
         ):String = "${BASE_URL}platform/$platformId"
     }
-    object Creator:Screen("${BASE_URL}creator_info/{creator_id}"){
+    object CreatorInfo:Screen("${BASE_URL}creator_info/{creator_id}"){
         fun arguments(
             creatorId:Int
         ):String = "${BASE_URL}creator_info/$creatorId"
+    }
+    object StoreInfo:Screen("${BASE_URL}store_info/{store_id}"){
+        fun arguments(
+            storeId:Int
+        ):String = "${BASE_URL}store_info/$storeId"
     }
 }

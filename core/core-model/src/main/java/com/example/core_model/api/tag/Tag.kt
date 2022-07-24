@@ -20,5 +20,5 @@ data class TagVideoGame(
     val id:Int,
     val name:String,
     val slug:String,
-    val added:Int
+    val added:Int?
 )

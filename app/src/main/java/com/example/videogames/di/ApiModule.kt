@@ -1,25 +1,29 @@
 package com.example.videogames.di
 
-import com.example.core_network_data.api.CreatorApi
-import com.example.core_network_data.api.GamesApi
-import com.example.core_network_data.api.PlatformApi
-import com.example.core_network_data.api.StoreApi
-import com.example.core_network_data.repository.CreatorRepositoryImpl
-import com.example.core_network_data.repository.GamesRepositoryImpl
-import com.example.core_network_data.repository.PlatformRepositoryImpl
-import com.example.core_network_data.repository.StoreRepositoryImpl
-import com.example.core_network_domain.repository.CreatorRepository
-import com.example.core_network_domain.repository.GamesRepository
-import com.example.core_network_domain.repository.PlatformRepository
-import com.example.core_network_domain.repository.StoreRepository
+import com.example.core_network_data.api.*
+import com.example.core_network_data.repository.*
+import com.example.core_network_domain.repository.*
 import com.example.videogames.common.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class ApiModule {
+
+    @[Provides AppScope]
+    fun providerTagRepository(
+        tagApi: TagApi
+    ):TagRepository = TagRepositoryImpl(
+        tagApi = tagApi
+    )
+
+    @[Provides AppScope]
+    fun providerTagApi(
+        retrofit: Retrofit
+    ):TagApi = retrofit.create(TagApi::class.java)
 
     @[Provides AppScope]
     fun providerStoreRepository(
@@ -73,5 +77,6 @@ class ApiModule {
     fun providerRetrofit():Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 }

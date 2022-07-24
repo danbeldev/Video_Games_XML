@@ -8,14 +8,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core_model.api.videoGame.VideoGameItem
-import com.example.core_network_domain.source.CreatorsPagingSource
-import com.example.core_network_domain.source.PlatformPagingSource
-import com.example.core_network_domain.source.StoresPagingSource
-import com.example.core_network_domain.source.VideoGamesPagingSource
+import com.example.core_network_domain.source.*
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.core_network_domain.useCase.platform.GetPlatformUseCase
 import com.example.core_network_domain.useCase.store.GetStoresUseCase
+import com.example.core_network_domain.useCase.tag.GetTagsUseCase
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -23,8 +21,17 @@ internal class MainViewModel(
     private val getGamesUseCase: GetGamesUseCase,
     private val getCreatorsUseCase: GetCreatorsUseCase,
     private val getPlatformPagingSource:GetPlatformUseCase,
-    private val getStoresUseCase: GetStoresUseCase
+    private val getStoresUseCase: GetStoresUseCase,
+    private val getTagsUseCase: GetTagsUseCase
 ) : ViewModel() {
+
+    val tags = Pager(
+        PagingConfig(pageSize = 20)
+    ){
+        TagsPagingSource(
+            getTagsUseCase = getTagsUseCase
+        )
+    }.flow.cachedIn(viewModelScope)
 
     val stores = Pager(
         PagingConfig(pageSize = 20)
@@ -62,7 +69,8 @@ internal class MainViewModel(
         private val getGamesUseCase: GetGamesUseCase,
         private val getCreatorsUseCase: GetCreatorsUseCase,
         private val getPlatformPagingSource: GetPlatformUseCase,
-        private val getStoresUseCase: GetStoresUseCase
+        private val getStoresUseCase: GetStoresUseCase,
+        private val getTagsUseCase: GetTagsUseCase
     ): ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -71,7 +79,8 @@ internal class MainViewModel(
                 getGamesUseCase,
                 getCreatorsUseCase,
                 getPlatformPagingSource,
-                getStoresUseCase
+                getStoresUseCase,
+                getTagsUseCase
             ) as T
         }
     }

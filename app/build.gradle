@@ -47,6 +47,7 @@ dependencies {
     implementation project(":feature:feature-video-game-info")
     implementation project(":feature:feature-platform-info")
     implementation project(":feature:feature-creator-info")
+    implementation project(":feature:feature-store-info")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -72,6 +73,7 @@ dependencies {
     //Retrofit
     def retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     //Dagger

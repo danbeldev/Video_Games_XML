@@ -7,6 +7,7 @@ import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.core_network_domain.useCase.platform.GetPlatformUseCase
 import com.example.core_network_domain.useCase.store.GetStoresUseCase
+import com.example.core_network_domain.useCase.tag.GetTagsUseCase
 import com.example.feature_main.screens.mainScreen.MainFragment
 import com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment
 import dagger.Component
@@ -34,6 +35,7 @@ interface MainDeps{
     val getCreatorsUseCase:GetCreatorsUseCase
     val getPlatformUseCase: GetPlatformUseCase
     val getStoresUseCase: GetStoresUseCase
+    val getTagsUseCase:GetTagsUseCase
 }
 
 interface MainDepsProvider {
