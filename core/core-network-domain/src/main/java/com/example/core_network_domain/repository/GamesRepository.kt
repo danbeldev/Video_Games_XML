@@ -10,7 +10,8 @@ interface GamesRepository {
         page:Int,
         search:String?,
         platforms:String?,
-        creators:String?
+        creators:String?,
+        stores:String?
     ):Response<VideoGame>
 
     suspend fun getGameInfo(

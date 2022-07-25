@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/core-common" />
+            <option value="$PROJECT_DIR$/core/core-database-data" />
+            <option value="$PROJECT_DIR$/core/core-database-domain" />
             <option value="$PROJECT_DIR$/core/core-model" />
             <option value="$PROJECT_DIR$/core/core-network-data" />
             <option value="$PROJECT_DIR$/core/core-network-domain" />

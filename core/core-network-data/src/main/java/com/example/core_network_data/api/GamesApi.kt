@@ -24,7 +24,8 @@ interface GamesApi {
         @Query("page_size") page_size:Int = 20,
         @Query("search") search:String?,
         @Query("platforms") platforms:String?,
-        @Query("creators") creators:String?
+        @Query("creators") creators:String?,
+        @Query("stores") stores:String?
     ):Response<VideoGame>
 
     @GET("$GAMES_URL/{id}")

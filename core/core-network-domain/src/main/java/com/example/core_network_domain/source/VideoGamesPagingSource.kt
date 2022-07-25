@@ -10,7 +10,8 @@ class VideoGamesPagingSource(
     private val getGamesUseCase: GetGamesUseCase,
     private val search:String? = null,
     private val platforms:String? = null,
-    private val creators:String? = null
+    private val creators:String? = null,
+    private val stores:String? = null
 ):PagingSource<Int, VideoGameItem>() {
     override fun getRefreshKey(state: PagingState<Int, VideoGameItem>): Int? {
         return state.anchorPosition
@@ -25,7 +26,8 @@ class VideoGamesPagingSource(
                 page = page,
                 search = search,
                 platforms = platforms,
-                creators = creators
+                creators = creators,
+                stores = stores
             )){
                 is Result.Error -> LoadResult.Error(Exception(videoGameItem.message))
                 is Result.Loading -> LoadResult.Invalid()

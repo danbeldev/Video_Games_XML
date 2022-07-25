@@ -15,13 +15,15 @@ class GamesRepositoryImpl @Inject constructor(
         page: Int,
         search: String?,
         platforms:String?,
-        creators:String?
+        creators:String?,
+        stores:String?
     ): Response<VideoGame> {
         return gamesApi.getGames(
             page = page,
             search = search,
             platforms = platforms,
-            creators = creators
+            creators = creators,
+            stores = stores
         )
     }
 

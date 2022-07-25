@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id("kotlin-kapt")
+    id 'io.realm.kotlin' version '0.10.0'
 }
 
 android {
@@ -42,6 +43,8 @@ dependencies {
     implementation project(":core:core-ui")
     implementation project(":core:core-network-domain")
     implementation project(":core:core-network-data")
+    implementation project(":core:core-database-domain")
+    implementation project(":core:core-database-data")
 
     implementation project(":feature:feature-main")
     implementation project(":feature:feature-video-game-info")
@@ -75,6 +78,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    //Realm
+    implementation("io.realm.kotlin:library-base:0.10.0")
 
     //Dagger
     implementation("com.google.dagger:dagger:2.41")

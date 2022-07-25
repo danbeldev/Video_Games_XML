@@ -1,5 +1,6 @@
 package com.example.videogames.di
 
+import com.example.core_database_domain.userCase.favoriteVideoGame.GetFavoriteVideoGamesUseCase
 import com.example.core_network_domain.useCase.creator.GetCreatorByIdUseCase
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.*
@@ -16,7 +17,7 @@ import com.example.feature_video_game_info.di.GameInfoDeps
 import dagger.Component
 import javax.inject.Scope
 
-@[AppScope Component(modules = [ApiModule::class])]
+@[AppScope Component(modules = [ApiModule::class, DatabaseModule::class])]
 interface AppComponent
     : MainDeps, GameInfoDeps, PlatformDeps, CreatorDeps, StoreDeps
 {
@@ -41,6 +42,8 @@ interface AppComponent
 
     override val getTagsUseCase: GetTagsUseCase
 
+    override val getFavoriteVideoGamesUseCase: GetFavoriteVideoGamesUseCase
+
     override val getPlatformByIdUseCase: GetPlatformByIdUseCase
 
     override val getSeriesUseCase: GetSeriesUseCase
@@ -50,6 +53,8 @@ interface AppComponent
     override val getCreatorByIdUseCase: GetCreatorByIdUseCase
 
     override val getStoreByIdUseCase: GetStoreByIdUseCase
+
+    override val getVideoGamesUseCase: GetGamesUseCase
 }
 
 @Scope

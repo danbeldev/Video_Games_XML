@@ -1,4 +1,4 @@
-package com.example.feature_main.screens.mainScreen.adapter
+package com.example.feature_main.screens.feedScreen.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

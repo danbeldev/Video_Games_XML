@@ -3,6 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +11,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "Video Games"
@@ -24,3 +26,5 @@ include ':core:core-ui'
 include ':feature:feature-platform-info'
 include ':feature:feature-creator-info'
 include ':feature:feature-store-info'
+include ':core:core-database-data'
+include ':core:core-database-domain'

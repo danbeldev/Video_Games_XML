@@ -3,6 +3,7 @@ package com.example.feature_store_info.di
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
+import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.core_network_domain.useCase.store.GetStoreByIdUseCase
 import com.example.feature_store_info.screens.storeInfo.StoreInfoFragment
 import dagger.Component
@@ -24,6 +25,7 @@ interface StoreInfoComponent {
 
 interface StoreDeps {
     val getStoreByIdUseCase:GetStoreByIdUseCase
+    val getVideoGamesUseCase: GetGamesUseCase
 }
 
 interface StoreDepsProvider {

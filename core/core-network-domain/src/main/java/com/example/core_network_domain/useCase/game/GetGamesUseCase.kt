@@ -13,13 +13,15 @@ class GetGamesUseCase @Inject constructor(
         page:Int,
         search:String? = null,
         platforms:String? = null,
-        creators:String? = null
+        creators:String? = null,
+        stores:String? = null
     ): Result<VideoGame> {
         return safeApiCall { gamesRepository.getGames(
             page = page,
             search = search,
             platforms = platforms,
-            creators = creators
+            creators = creators,
+            stores = stores
         ) }
     }
 }

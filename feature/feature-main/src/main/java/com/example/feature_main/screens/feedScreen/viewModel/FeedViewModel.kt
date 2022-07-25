@@ -1,4 +1,4 @@
-package com.example.feature_main.screens.mainScreen.viewModel
+package com.example.feature_main.screens.feedScreen.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +17,7 @@ import com.example.core_network_domain.useCase.tag.GetTagsUseCase
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-internal class MainViewModel(
+internal class FeedViewModel(
     private val getGamesUseCase: GetGamesUseCase,
     private val getCreatorsUseCase: GetCreatorsUseCase,
     private val getPlatformPagingSource:GetPlatformUseCase,
@@ -74,8 +74,8 @@ internal class MainViewModel(
     ): ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == MainViewModel::class.java)
-            return MainViewModel(
+            require(modelClass == FeedViewModel::class.java)
+            return FeedViewModel(
                 getGamesUseCase,
                 getCreatorsUseCase,
                 getPlatformPagingSource,
