@@ -4,8 +4,6 @@ import com.example.core_database_data.database.FavoriteVideoGameDatabase
 import com.example.core_database_domain.repository.FavoriteVideoGameRepository
 import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGame
 import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGameDTO
-import io.realm.notifications.ResultsChange
-import io.realm.query.RealmScalarQuery
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,8 +15,9 @@ class FavoriteVideoGameRepositoryImpl @Inject constructor(
 
     override fun getAll(): Flow<List<FavoriteVideoGameDTO>> = database.getAll()
 
-    override fun getCount(): RealmScalarQuery<Long> = database.getCount()
+    override fun getCount(): Flow<Long> = database.getCount()
 
-    override suspend fun delete(item: FavoriteVideoGame) = database.delete(item)
+    override fun getCheckVideoGameById(id: Int): Boolean = database.getCheckVideoGameById(id)
 
+    override suspend fun delete(id: Int) = database.delete(id)
 }

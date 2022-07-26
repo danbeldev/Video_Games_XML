@@ -1,6 +1,6 @@
 package com.example.videogames.di
 
-import com.example.core_database_domain.userCase.favoriteVideoGame.GetFavoriteVideoGamesUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.*
 import com.example.core_network_domain.useCase.creator.GetCreatorByIdUseCase
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.*
@@ -21,7 +21,6 @@ import javax.inject.Scope
 interface AppComponent
     : MainDeps, GameInfoDeps, PlatformDeps, CreatorDeps, StoreDeps
 {
-
     override val getGamesUseCase: GetGamesUseCase
 
     override val getCreatorsUseCase: GetCreatorsUseCase
@@ -55,6 +54,14 @@ interface AppComponent
     override val getStoreByIdUseCase: GetStoreByIdUseCase
 
     override val getVideoGamesUseCase: GetGamesUseCase
+
+    override val getCheckVideoGameByIdUseCase: GetCheckVideoGameByIdUseCase
+
+    override val getFavoriteVideoGamesCountUseCase: GetFavoriteVideoGamesCountUseCase
+
+    override val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase
+
+    override val writeFavoriteVideoGamesUseCase: WriteFavoriteVideoGamesUseCase
 }
 
 @Scope

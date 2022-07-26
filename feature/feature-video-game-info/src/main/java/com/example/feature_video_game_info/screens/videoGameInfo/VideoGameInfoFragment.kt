@@ -21,6 +21,7 @@ import com.example.core_common.naigation.navigation
 import com.example.core_model.api.videoGame.Achievement
 import com.example.core_model.api.videoGame.Trailer
 import com.example.core_model.api.videoGame.VideoGameInfo
+import com.example.core_model.database.favoriteVideoGame.favoriteVideoGame
 import com.example.core_network_domain.response.Result
 import com.example.core_ui.animation.navOptionIsModal
 import com.example.feature_video_game_info.R
@@ -36,8 +37,12 @@ import com.example.feature_video_game_info.screens.videoGameInfo.adapter.Trailer
 import com.example.feature_video_game_info.screens.videoGameInfo.viewModel.VideoGameInfoViewModel
 import com.example.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment
 import dagger.Lazy
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
@@ -252,6 +257,11 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
         binding.redditUrl.text = data.reddit_url
 
         binding.metacriticUrl.text = data.metacritic_url
+
+        favoriteVideoGame(
+            binding = binding,
+            videoGame = data
+        )
     }
 
     private fun successAchievements(
@@ -293,5 +303,41 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
 
         binding.trailers.adapter = trailerAdapter
         binding.trailers.layoutManager = trailerLayoutManager
+    }
+
+    private fun favoriteVideoGame(
+        binding: FragmentVideoGameInfoBinding,
+        videoGame:VideoGameInfo
+    ){
+        viewModel.getFavoriteCheckVideoGameById(videoGame.id)
+        lifecycleScope.launchWhenStarted {
+            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
+                viewModel.responseFavoriteVideoGameFavoriteCheck.onEach { check ->
+                    binding.favoriteImage.setImageResource(
+                        if (check){ R.drawable.ic_favorite_red }else { R.drawable.ic_favorite }
+                    )
+                }.collect()
+            }
+        }
+
+        binding.favoriteImage.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.responseFavoriteVideoGameFavoriteCheck.onEach { check ->
+                    if (check){
+//                        binding.favoriteImage.setImageResource(R.drawable.ic_favorite)
+//                        viewModel.deleteFavoriteVideoGames(videoGame.id)
+                    }else {
+                        binding.favoriteImage.setImageResource(R.drawable.ic_favorite_red)
+                        viewModel.writeFavoriteVideoGames(
+                            item = favoriteVideoGame {
+                                id = videoGame.id
+                                name = videoGame.name
+                                backgroundImage = videoGame.background_image
+                            }
+                        )
+                    }
+                }.collect()
+            }
+        }
     }
 }

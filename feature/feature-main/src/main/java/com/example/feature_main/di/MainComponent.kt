@@ -3,6 +3,8 @@ package com.example.feature_main.di
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
+import com.example.core_database_domain.userCase.favoriteVideoGame.DeleteFavoriteVideoGamesUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.GetFavoriteVideoGamesCountUseCase
 import com.example.core_database_domain.userCase.favoriteVideoGame.GetFavoriteVideoGamesUseCase
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
@@ -11,12 +13,15 @@ import com.example.core_network_domain.useCase.store.GetStoresUseCase
 import com.example.core_network_domain.useCase.tag.GetTagsUseCase
 import com.example.feature_main.screens.feedScreen.FeedFragment
 import com.example.feature_main.screens.likesScreen.LikesFragment
+import com.example.feature_main.screens.mainScreen.MainFragment
 import com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment
 import dagger.Component
 import kotlin.properties.Delegates
 
 @[Feature Component(dependencies = [MainDeps::class])]
 interface MainComponent{
+
+    fun injectMainFragment(fragment: MainFragment)
 
     fun injectFeedFragment(fragment: FeedFragment)
 
@@ -41,6 +46,8 @@ interface MainDeps{
     val getStoresUseCase: GetStoresUseCase
     val getTagsUseCase:GetTagsUseCase
     val getFavoriteVideoGamesUseCase: GetFavoriteVideoGamesUseCase
+    val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase
+    val getFavoriteVideoGamesCountUseCase: GetFavoriteVideoGamesCountUseCase
 }
 
 interface MainDepsProvider {

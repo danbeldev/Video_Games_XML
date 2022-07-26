@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'io.realm.kotlin' version '0.10.0'
     id("kotlin-kapt")
 }
 
@@ -36,6 +37,7 @@ android {
 dependencies {
 
     implementation project(":core:core-network-domain")
+    implementation project(":core:core-database-domain")
     implementation project(":core:core-model")
     implementation project(":core:core-common")
     implementation project(":core:core-ui")
@@ -79,6 +81,9 @@ dependencies {
 
     //Exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.18.0'
+
+    //Realm
+    implementation("io.realm.kotlin:library-base:0.10.0")
 
     //Dagger
     implementation("com.google.dagger:dagger:2.41")

@@ -7,8 +7,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.core_database_domain.userCase.favoriteVideoGame.DeleteFavoriteVideoGamesUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.GetCheckVideoGameByIdUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.WriteFavoriteVideoGamesUseCase
 import com.example.core_model.api.creator.CreatorItem
 import com.example.core_model.api.videoGame.*
+import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGame
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.source.AdditionsPagingSource
 import com.example.core_network_domain.source.DeveloperTeamPageSource
@@ -16,6 +20,7 @@ import com.example.core_network_domain.source.SeriesPagingSource
 import com.example.core_network_domain.source.VideoGameScreenshots
 import com.example.core_network_domain.useCase.game.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class VideoGameInfoViewModel (
@@ -25,7 +30,10 @@ internal class VideoGameInfoViewModel (
     private val getDeveloperTeamUseCase:GetDeveloperTeamUseCase,
     private val getTrailerUseCase: GetTrailerUseCase,
     private val getSeriesUseCase: GetSeriesUseCase,
-    private val getAdditionsUseCase:GetAdditionsUseCase
+    private val getAdditionsUseCase:GetAdditionsUseCase,
+    private val getFavoriteCheckVideoGameByIdUseCase: GetCheckVideoGameByIdUseCase,
+    private val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase,
+    private val writeFavoriteVideoGamesUseCase: WriteFavoriteVideoGamesUseCase
 ) : ViewModel() {
 
     private val _responseVideoGameInfo:MutableStateFlow<Result<VideoGameInfo>> =
@@ -39,6 +47,9 @@ internal class VideoGameInfoViewModel (
     private val _responseTrailer:MutableStateFlow<Result<Trailer>> =
         MutableStateFlow(Result.Loading())
     val responseTrailer = _responseTrailer.asStateFlow()
+
+    private val _responseFavoriteVideoGameFavoriteCheck:MutableStateFlow<Boolean?> = MutableStateFlow(null)
+    val responseFavoriteVideoGameFavoriteCheck = _responseFavoriteVideoGameFavoriteCheck.asStateFlow().filterNotNull()
 
     fun getVideoGameInfo(id:Int){
         getGameInfoUseCase.invoke(id).onEach {
@@ -94,6 +105,19 @@ internal class VideoGameInfoViewModel (
         }.flow.cachedIn(viewModelScope)
     }
 
+    fun getFavoriteCheckVideoGameById(id:Int){
+        val response = getFavoriteCheckVideoGameByIdUseCase.invoke(id)
+        _responseFavoriteVideoGameFavoriteCheck.value = response
+    }
+
+    fun deleteFavoriteVideoGames(id:Int){
+        viewModelScope.launch { deleteFavoriteVideoGamesUseCase.invoke(id) }
+    }
+
+    fun writeFavoriteVideoGames(item: FavoriteVideoGame){
+        viewModelScope.launch { writeFavoriteVideoGamesUseCase.invoke(item) }
+    }
+
     class Factory @Inject constructor(
         private val getGameInfoUseCase: GetGameInfoUseCase,
         private val getAchievementsUseCase: GetAchievementsUseCase,
@@ -101,7 +125,10 @@ internal class VideoGameInfoViewModel (
         private val getDeveloperTeamUseCase: GetDeveloperTeamUseCase,
         private val getTrailerUseCase: GetTrailerUseCase,
         private val getSeriesUseCase: GetSeriesUseCase,
-        private val getAdditionsUseCase:GetAdditionsUseCase
+        private val getAdditionsUseCase:GetAdditionsUseCase,
+        private val getFavoriteCheckVideoGameByIdUseCase: GetCheckVideoGameByIdUseCase,
+        private val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase,
+        private val writeFavoriteVideoGamesUseCase: WriteFavoriteVideoGamesUseCase
     ):ViewModelProvider.Factory{
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -113,7 +140,10 @@ internal class VideoGameInfoViewModel (
                 getDeveloperTeamUseCase = getDeveloperTeamUseCase,
                 getTrailerUseCase = getTrailerUseCase,
                 getSeriesUseCase = getSeriesUseCase,
-                getAdditionsUseCase = getAdditionsUseCase
+                getAdditionsUseCase = getAdditionsUseCase,
+                getFavoriteCheckVideoGameByIdUseCase = getFavoriteCheckVideoGameByIdUseCase,
+                deleteFavoriteVideoGamesUseCase = deleteFavoriteVideoGamesUseCase,
+                writeFavoriteVideoGamesUseCase = writeFavoriteVideoGamesUseCase
             ) as T
         }
     }

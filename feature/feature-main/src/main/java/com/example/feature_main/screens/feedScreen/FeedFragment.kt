@@ -227,7 +227,7 @@ class FeedFragment:Fragment(R.layout.fragment_feed) {
 
         binding.videoGamesText.setOnClickListener {
             findNavController().navigate(
-                R.id.action_mainFragment_to_videoGamesFragment,
+                R.id.action_feedFragment_to_videoGamesFragment,
                 bundleOf(),
                 navOptionIsModal()
             )

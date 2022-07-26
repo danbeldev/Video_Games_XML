@@ -12,5 +12,15 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.example.feature_main.screens.feedScreen.FeedFragment"
-        android:label="FeedFragment" />
+        android:label="FeedFragment" >
+        <action
+            android:id="@+id/action_feedFragment_to_videoGamesFragment"
+            app:destination="@id/videoGamesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoGamesFragment"
+        android:name="com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment"
+        android:label="VideoGamesFragment" />
+
 </navigation>

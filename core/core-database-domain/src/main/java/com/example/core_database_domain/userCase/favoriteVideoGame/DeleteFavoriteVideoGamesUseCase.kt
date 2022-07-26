@@ -7,5 +7,5 @@ import javax.inject.Inject
 class DeleteFavoriteVideoGamesUseCase @Inject constructor(
     private val repository: FavoriteVideoGameRepository
 ) {
-    suspend operator fun invoke(item:FavoriteVideoGame) = repository.delete(item)
+    suspend operator fun invoke(id:Int) = repository.delete(id)
 }
