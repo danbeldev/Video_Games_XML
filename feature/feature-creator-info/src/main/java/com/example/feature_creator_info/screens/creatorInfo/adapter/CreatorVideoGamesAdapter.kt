@@ -43,6 +43,6 @@ private object CreatorVideoGameItemDiffItemCallback : DiffUtil.ItemCallback<Vide
     }
 
     override fun areContentsTheSame(oldItem: VideoGameItem, newItem: VideoGameItem): Boolean {
-        return oldItem.name == newItem.name && oldItem.background_image == newItem.background_image
+        return oldItem.id == newItem.id
     }
 }

@@ -5,14 +5,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.core_model.api.creator.CreatorInfo
-import com.example.core_model.api.videoGame.VideoGameItem
+import com.example.core_model.state.ErrorState
 import com.example.core_network_domain.response.Result
 import com.example.core_network_domain.source.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.creator.GetCreatorByIdUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
+import com.example.feature_creator_info.screens.creatorInfo.action.CreatorInfoAction
+import com.example.feature_creator_info.screens.creatorInfo.model.CreatorInfoStateSucces
+import com.example.feature_creator_info.screens.creatorInfo.state.CreatorInfoState
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -21,21 +22,61 @@ internal class CreatorInfoViewModel(
     private val getGamesUseCase: GetGamesUseCase
 ):ViewModel() {
 
-    private val _responseCreator:MutableStateFlow<Result<CreatorInfo>> = MutableStateFlow(Result.Loading())
-    val responseCreator = _responseCreator.asStateFlow()
+    private val _creatorInfoState = MutableStateFlow<CreatorInfoState>(CreatorInfoState.Loading)
+    val creatorInfoState = _creatorInfoState.asStateFlow()
 
-    fun getGames(creatorId: Int): Flow<PagingData<VideoGameItem>> {
-        return Pager(PagingConfig(pageSize = 20)){
+    fun renderAction(action:CreatorInfoAction){
+        when(action){
+            is CreatorInfoAction.GetCreatorInfo -> {
+                getCreator(creatorId = action.creatorId)
+                getGames(creatorId = action.creatorId)
+            }
+        }
+    }
+
+    private fun getGames(creatorId: Int) {
+
+        val pagerData =  Pager(PagingConfig(pageSize = 20)){
             VideoGamesPagingSource(
                 getGamesUseCase = getGamesUseCase,
                 creators = creatorId.toString()
             )
         }.flow.cachedIn(viewModelScope)
+
+        _creatorInfoState.value = CreatorInfoState.Succes(
+            data = CreatorInfoStateSucces(
+                creatorInfo = (_creatorInfoState.value as CreatorInfoState.Succes).data.creatorInfo,
+                videoGamesCreatorInfo = pagerData
+            )
+        )
     }
 
-    fun getCreator(id:Int){
-        getCreatorByIdUseCase.invoke(id).onEach {
-            _responseCreator.value = it
+    private fun getCreator(creatorId:Int){
+        getCreatorByIdUseCase.invoke(creatorId).onEach { result ->
+            when(result){
+                is Result.Error -> {
+                    _creatorInfoState.value = CreatorInfoState.Error(
+                        error = ErrorState(
+                            message = result.message ?: "Error"
+                        )
+                    )
+                }
+                is Result.Loading -> {
+                    _creatorInfoState.value = CreatorInfoState.Loading
+                }
+                is Result.Success -> {
+
+                    _creatorInfoState.value = CreatorInfoState.Succes(
+                        data = CreatorInfoStateSucces(
+                            creatorInfo = result.data,
+                            videoGamesCreatorInfo = if (_creatorInfoState.value is CreatorInfoState.Succes)
+                                (_creatorInfoState.value as CreatorInfoState.Succes).data.videoGamesCreatorInfo
+                            else
+                                null
+                        )
+                    )
+                }
+            }
         }.launchIn(viewModelScope)
     }
 
