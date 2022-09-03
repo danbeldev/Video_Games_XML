@@ -42,7 +42,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         viewModel.responseFavoriteVideoGames.onEach {
             if (it > 0){
-                badge.number = it.toInt()
+                badge.number = it
                 badge.isVisible = true
             }else {
                 badge.isVisible = false

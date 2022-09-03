@@ -8,16 +8,16 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core_database_domain.userCase.favoriteVideoGame.DeleteFavoriteVideoGamesUseCase
-import com.example.core_database_domain.userCase.favoriteVideoGame.GetCheckVideoGameByIdUseCase
-import com.example.core_database_domain.userCase.favoriteVideoGame.WriteFavoriteVideoGamesUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.IfVideoGameInDatabaseUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.AddFavoriteVideoGamesUseCase
 import com.example.core_model.api.creator.CreatorItem
 import com.example.core_model.api.videoGame.*
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGame
+import com.example.core_model.database.room.favoriteVideoGame.FavoriteVideoGameDTO
 import com.example.core_network_domain.response.Result
-import com.example.core_network_domain.source.AdditionsPagingSource
-import com.example.core_network_domain.source.DeveloperTeamPageSource
-import com.example.core_network_domain.source.SeriesPagingSource
-import com.example.core_network_domain.source.VideoGameScreenshots
+import com.example.core_network_domain.pagingSource.AdditionsPagingSource
+import com.example.core_network_domain.pagingSource.DeveloperTeamPageSource
+import com.example.core_network_domain.pagingSource.SeriesPagingSource
+import com.example.core_network_domain.pagingSource.VideoGameScreenshots
 import com.example.core_network_domain.useCase.game.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -31,9 +31,9 @@ internal class VideoGameInfoViewModel (
     private val getTrailerUseCase: GetTrailerUseCase,
     private val getSeriesUseCase: GetSeriesUseCase,
     private val getAdditionsUseCase:GetAdditionsUseCase,
-    private val getFavoriteCheckVideoGameByIdUseCase: GetCheckVideoGameByIdUseCase,
+    private val getFavoriteCheckVideoGameByIdUseCase: IfVideoGameInDatabaseUseCase,
     private val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase,
-    private val writeFavoriteVideoGamesUseCase: WriteFavoriteVideoGamesUseCase
+    private val writeFavoriteVideoGamesUseCase: AddFavoriteVideoGamesUseCase
 ) : ViewModel() {
 
     private val _responseVideoGameInfo:MutableStateFlow<Result<VideoGameInfo>> =
@@ -105,16 +105,40 @@ internal class VideoGameInfoViewModel (
         }.flow.cachedIn(viewModelScope)
     }
 
-    fun getFavoriteCheckVideoGameById(id:Int){
-        val response = getFavoriteCheckVideoGameByIdUseCase.invoke(id)
-        _responseFavoriteVideoGameFavoriteCheck.value = response
+    fun updateFavoriteCheckVideoGame(check:Boolean){
+        viewModelScope.launch {
+            _responseVideoGameInfo.collect { result ->
+                if (result is Result.Success){
+                    _responseFavoriteVideoGameFavoriteCheck.value = check
+
+                    if (check){
+                        writeFavoriteVideoGames(
+                            item = FavoriteVideoGameDTO(
+                                id = result.data!!.id,
+                                name = result.data!!.name,
+                                backgroundImage = result.data!!.background_image
+                            )
+                        )
+                    }else{
+                        deleteFavoriteVideoGames(result.data!!.id)
+                    }
+                }
+            }
+        }
     }
 
-    fun deleteFavoriteVideoGames(id:Int){
+    fun getFavoriteCheckVideoGameById(id:Int){
+        viewModelScope.launch {
+            val response = getFavoriteCheckVideoGameByIdUseCase.invoke(id)
+            _responseFavoriteVideoGameFavoriteCheck.value = response
+        }
+    }
+
+    private fun deleteFavoriteVideoGames(id:Int){
         viewModelScope.launch { deleteFavoriteVideoGamesUseCase.invoke(id) }
     }
 
-    fun writeFavoriteVideoGames(item: FavoriteVideoGame){
+    private fun writeFavoriteVideoGames(item: FavoriteVideoGameDTO){
         viewModelScope.launch { writeFavoriteVideoGamesUseCase.invoke(item) }
     }
 
@@ -126,9 +150,9 @@ internal class VideoGameInfoViewModel (
         private val getTrailerUseCase: GetTrailerUseCase,
         private val getSeriesUseCase: GetSeriesUseCase,
         private val getAdditionsUseCase:GetAdditionsUseCase,
-        private val getFavoriteCheckVideoGameByIdUseCase: GetCheckVideoGameByIdUseCase,
+        private val getFavoriteCheckVideoGameByIdUseCase: IfVideoGameInDatabaseUseCase,
         private val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase,
-        private val writeFavoriteVideoGamesUseCase: WriteFavoriteVideoGamesUseCase
+        private val writeFavoriteVideoGamesUseCase: AddFavoriteVideoGamesUseCase
     ):ViewModelProvider.Factory{
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

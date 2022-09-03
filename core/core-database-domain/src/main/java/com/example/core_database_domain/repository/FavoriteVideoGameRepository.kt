@@ -1,18 +1,21 @@
 package com.example.core_database_domain.repository
 
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGame
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGameDTO
+import androidx.paging.PagingSource
+import com.example.core_model.database.room.favoriteVideoGame.FavoriteVideoGameDTO
 import kotlinx.coroutines.flow.Flow
 
 interface FavoriteVideoGameRepository {
 
-    suspend fun write(item: FavoriteVideoGame)
+    suspend fun addItem(item: FavoriteVideoGameDTO)
 
-    fun getAll():Flow<List<FavoriteVideoGameDTO>>
+    fun getItems(search:String = ""): PagingSource<Int, FavoriteVideoGameDTO>
 
-    fun getCount(): Flow<Long>
+    fun getCount(): Flow<Int>
 
-    fun getCheckVideoGameById(id:Int):Boolean
+    // if the video game is in the database
+    suspend fun ifVideoGameInDatabase(id:Int):Boolean
 
-    suspend fun delete(id:Int)
+    suspend fun deleteItem(id:Int)
+
+    suspend fun clear()
 }

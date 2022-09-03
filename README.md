@@ -14,7 +14,7 @@
 
 ## Technology stack
 - Kotlin
-- xml
+- Xml
 - Multi module
 - Clean Architecture (Jetpack ViewModel + Flow)
 - Fragment
@@ -24,7 +24,7 @@
 - Okhttp
 - Kotlin Serialization
 - Jetpack Navigation
-- Realm
+- Room
 - Jetpack Paging 3
 - Coil
 

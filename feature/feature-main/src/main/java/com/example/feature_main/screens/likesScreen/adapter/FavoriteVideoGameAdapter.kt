@@ -2,15 +2,16 @@ package com.example.feature_main.screens.likesScreen.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGameDTO
+import com.example.core_model.database.room.favoriteVideoGame.FavoriteVideoGameDTO
 import com.example.feature_main.databinding.ItemFavoriteVideoGameBinding
 
 internal class FavoriteVideoGameAdapter(
-    private val videoGames:List<FavoriteVideoGameDTO>,
     private val onClickItem:(FavoriteVideoGameDTO) -> Unit
-):RecyclerView.Adapter<FavoriteVideoGameViewHolder>() {
+): PagingDataAdapter<FavoriteVideoGameDTO, FavoriteVideoGameViewHolder>(FavoriteVideoGameDiffItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteVideoGameViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,7 +21,7 @@ internal class FavoriteVideoGameAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteVideoGameViewHolder, position: Int) {
-        val item = videoGames[position]
+        val item = getItem(position) ?: return
 
         with(holder.binding){
             backgroundImage.load(item.backgroundImage)
@@ -28,11 +29,22 @@ internal class FavoriteVideoGameAdapter(
             videoGameItem.setOnClickListener { onClickItem(item) }
         }
     }
-
-    override fun getItemCount(): Int = videoGames.size
 }
 
 internal class FavoriteVideoGameViewHolder(
     val binding:ItemFavoriteVideoGameBinding
 ):RecyclerView.ViewHolder(binding.root)
+
+internal object FavoriteVideoGameDiffItemCallback:DiffUtil.ItemCallback<FavoriteVideoGameDTO>(){
+
+    override fun areItemsTheSame(
+        oldItem: FavoriteVideoGameDTO,
+        newItem: FavoriteVideoGameDTO
+    ): Boolean = oldItem == newItem
+
+    override fun areContentsTheSame(
+        oldItem: FavoriteVideoGameDTO,
+        newItem: FavoriteVideoGameDTO
+    ): Boolean = oldItem.id == newItem.id
+}
 

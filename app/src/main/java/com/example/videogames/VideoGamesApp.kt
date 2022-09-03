@@ -13,6 +13,7 @@ class VideoGamesApp:Application() {
 
     private val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
+            .context(this)
             .build()
     }
 

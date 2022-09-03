@@ -1,16 +1,15 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'io.realm.kotlin' version '0.10.0'
     id("kotlin-kapt")
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
-        minSdk 23
-        targetSdk 32
+        minSdk 21
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -81,9 +80,6 @@ dependencies {
 
     //Exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.18.0'
-
-    //Realm
-    implementation("io.realm.kotlin:library-base:0.10.0")
 
     //Dagger
     implementation("com.google.dagger:dagger:2.41")

@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetFavoriteVideoGamesCountUseCase @Inject constructor(
     private val repository: FavoriteVideoGameRepository
 ) {
-    operator fun invoke(): Flow<Long> = repository.getCount()
+    operator fun invoke(): Flow<Int> = repository.getCount()
 }

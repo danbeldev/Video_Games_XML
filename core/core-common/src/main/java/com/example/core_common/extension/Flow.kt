@@ -30,7 +30,7 @@ fun <T:Any, VH : RecyclerView.ViewHolder>Flow<PagingData<T>>.launchWhenStartedPa
     }
 }
 
-fun <T>Fragment.launchWhenStarted(flow: () -> Flow<T>){
+fun <T>Fragment.launchWhenStarted(flow: suspend () -> Flow<T>){
     lifecycleScope.launch {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
             flow.invoke().collect()
@@ -40,7 +40,7 @@ fun <T>Fragment.launchWhenStarted(flow: () -> Flow<T>){
 
 fun <T:Any, VH : RecyclerView.ViewHolder>Fragment.launchWhenStartedPagingData(
     adapter: PagingDataAdapter<T,VH>,
-    flow: () -> Flow<PagingData<T>>
+    flow: suspend () -> Flow<PagingData<T>>
 ){
     lifecycleScope.launch {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){

@@ -8,7 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core_model.api.videoGame.VideoGameItem
-import com.example.core_network_domain.source.VideoGamesPagingSource
+import com.example.core_network_domain.pagingSource.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

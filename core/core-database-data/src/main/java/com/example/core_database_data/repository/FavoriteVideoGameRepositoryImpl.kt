@@ -1,23 +1,28 @@
 package com.example.core_database_data.repository
 
-import com.example.core_database_data.database.FavoriteVideoGameDatabase
+import androidx.paging.PagingSource
+import com.example.core_database_data.database.room.userDatabase.dao.FavoriteVideoGameDAO
 import com.example.core_database_domain.repository.FavoriteVideoGameRepository
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGame
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGameDTO
+import com.example.core_model.database.room.favoriteVideoGame.FavoriteVideoGameDTO
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class FavoriteVideoGameRepositoryImpl @Inject constructor(
-    private val database: FavoriteVideoGameDatabase
+    private val dao: FavoriteVideoGameDAO
 ): FavoriteVideoGameRepository {
 
-    override suspend fun write(item: FavoriteVideoGame) = database.write(item)
+    override suspend fun addItem(item: FavoriteVideoGameDTO) = dao.upsertItem(item)
 
-    override fun getAll(): Flow<List<FavoriteVideoGameDTO>> = database.getAll()
+    override fun getItems(search:String): PagingSource<Int, FavoriteVideoGameDTO> = dao.getItems(search)
 
-    override fun getCount(): Flow<Long> = database.getCount()
+    override fun getCount(): Flow<Int> = dao.getCount()
 
-    override fun getCheckVideoGameById(id: Int): Boolean = database.getCheckVideoGameById(id)
+    override suspend fun ifVideoGameInDatabase(id: Int): Boolean {
+        val videoGame = dao.getItem(id)
+        return videoGame != null
+    }
 
-    override suspend fun delete(id: Int) = database.delete(id)
+    override suspend fun deleteItem(id: Int) = dao.deleteItem(id)
+
+    override suspend fun clear() = dao.clear()
 }

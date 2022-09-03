@@ -1,11 +1,11 @@
 package com.example.core_database_domain.userCase.favoriteVideoGame
 
 import com.example.core_database_domain.repository.FavoriteVideoGameRepository
-import com.example.core_model.database.favoriteVideoGame.FavoriteVideoGame
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class WriteFavoriteVideoGamesUseCase @Inject constructor(
+class IfVideoGameInDatabaseUseCase @Inject constructor(
     private val repository: FavoriteVideoGameRepository
 ) {
-    suspend operator fun invoke(item: FavoriteVideoGame) = repository.write(item)
+    suspend operator fun invoke(id:Int):Boolean = repository.ifVideoGameInDatabase(id)
 }

@@ -8,7 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.core_model.state.ErrorState
 import com.example.core_network_domain.response.Result
-import com.example.core_network_domain.source.VideoGamesPagingSource
+import com.example.core_network_domain.pagingSource.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.creator.GetCreatorByIdUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.feature_creator_info.screens.creatorInfo.action.CreatorInfoAction
@@ -45,7 +45,10 @@ internal class CreatorInfoViewModel(
 
         _creatorInfoState.value = CreatorInfoState.Succes(
             data = CreatorInfoStateSucces(
-                creatorInfo = (_creatorInfoState.value as CreatorInfoState.Succes).data.creatorInfo,
+                creatorInfo = if (_creatorInfoState.value is CreatorInfoState.Succes)
+                    (_creatorInfoState.value as CreatorInfoState.Succes).data.creatorInfo
+                else
+                    null,
                 videoGamesCreatorInfo = pagerData
             )
         )

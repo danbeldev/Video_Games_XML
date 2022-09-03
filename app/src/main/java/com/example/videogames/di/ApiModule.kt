@@ -1,5 +1,6 @@
 package com.example.videogames.di
 
+import com.example.core_common.di.AppScope
 import com.example.core_network_data.api.*
 import com.example.core_network_data.repository.*
 import com.example.core_network_domain.repository.*

@@ -1,6 +1,4 @@
 package com.example.feature_main.screens.likesScreen
-
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +9,7 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core_common.extension.launchWhenStarted
+import com.example.core_common.extension.launchWhenStartedPagingData
 import com.example.core_common.naigation.NavCommand
 import com.example.core_common.naigation.NavCommands
 import com.example.core_common.naigation.Screen
@@ -23,7 +21,6 @@ import com.example.feature_main.di.MainComponentViewModel
 import com.example.feature_main.screens.likesScreen.adapter.FavoriteVideoGameAdapter
 import com.example.feature_main.screens.likesScreen.viewModel.LikesViewModel
 import dagger.Lazy
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class LikesFragment:Fragment(R.layout.fragment_likes) {
@@ -33,7 +30,23 @@ class LikesFragment:Fragment(R.layout.fragment_likes) {
 
     private val viewModel by viewModels<LikesViewModel> { viewModelFactory.get() }
 
-    private var favoriteVideoGameAdapter:FavoriteVideoGameAdapter? = null
+    private lateinit var binding:FragmentLikesBinding
+
+    private val favoriteVideoGameAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        FavoriteVideoGameAdapter { videGame ->
+            navigation(
+                NavCommand(
+                    NavCommands.DeepLink(
+                        url = Uri.parse(Screen.VideoGameInfo.arguments(
+                            videoGameId = videGame.id
+                        )),
+                        isModal = true,
+                        isSingleTop = false
+                    )
+                )
+            )
+        }
+    }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this).get<MainComponentViewModel>()
@@ -42,49 +55,33 @@ class LikesFragment:Fragment(R.layout.fragment_likes) {
         super.onAttach(context)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding = FragmentLikesBinding.bind(view)
+        binding = FragmentLikesBinding.bind(view)
 
         binding.favoriteVideoGames.layoutManager = LinearLayoutManager(this.context)
 
-        viewModel.getFavoriteVideoGames.onEach {
-            favoriteVideoGameAdapter = FavoriteVideoGameAdapter(it){ videGame ->
-                navigation(
-                    NavCommand(
-                        NavCommands.DeepLink(
-                            url = Uri.parse(Screen.VideoGameInfo.arguments(
-                                videoGameId = videGame.id
-                            )),
-                            isModal = true,
-                            isSingleTop = false
-                        )
-                    )
-                )
-            }
-            binding.favoriteVideoGames.adapter = favoriteVideoGameAdapter
-        }.launchWhenStarted(lifecycle, lifecycleScope)
+        launchWhenStartedPagingData(
+            adapter = favoriteVideoGameAdapter
+        ){ viewModel.getFavoriteVideoGames() }
 
-        swipeToDelete(binding = binding)
+        binding.favoriteVideoGames.adapter = favoriteVideoGameAdapter
+
+        swipeToDelete()
     }
 
-    private fun swipeToDelete(
-        binding: FragmentLikesBinding
-    ){
+    private fun swipeToDelete(){
         val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
 
-                viewModel.getFavoriteVideoGames.onEach { videoGames ->
-                    val item = videoGames.getOrNull(position) ?: return@onEach
-                    viewModel.deleteFavoriteVideoGames(item.id)
-                }.launchWhenStarted(lifecycle,lifecycleScope)
+                val videoGame = favoriteVideoGameAdapter.snapshot()[position] ?: return
 
-                favoriteVideoGameAdapter?.notifyItemRemoved(position)
+                viewModel.deleteFavoriteVideoGames(id = videoGame.id)
             }
         }
 
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(binding.favoriteVideoGames)
+
     }
 }

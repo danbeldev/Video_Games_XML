@@ -8,7 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core_model.api.videoGame.VideoGameItem
-import com.example.core_network_domain.source.*
+import com.example.core_network_domain.pagingSource.*
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.core_network_domain.useCase.platform.GetPlatformUseCase

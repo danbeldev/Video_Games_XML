@@ -10,7 +10,7 @@ import androidx.paging.cachedIn
 import com.example.core_model.api.platform.PlatformInfo
 import com.example.core_model.api.videoGame.VideoGameItem
 import com.example.core_network_domain.response.Result
-import com.example.core_network_domain.source.VideoGamesPagingSource
+import com.example.core_network_domain.pagingSource.VideoGamesPagingSource
 import com.example.core_network_domain.useCase.game.GetGamesUseCase
 import com.example.core_network_domain.useCase.platform.GetPlatformByIdUseCase
 import kotlinx.coroutines.flow.*

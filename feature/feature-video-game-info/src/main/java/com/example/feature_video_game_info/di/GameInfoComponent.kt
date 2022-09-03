@@ -4,8 +4,8 @@ import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import com.example.core_common.di.Feature
 import com.example.core_database_domain.userCase.favoriteVideoGame.DeleteFavoriteVideoGamesUseCase
-import com.example.core_database_domain.userCase.favoriteVideoGame.GetCheckVideoGameByIdUseCase
-import com.example.core_database_domain.userCase.favoriteVideoGame.WriteFavoriteVideoGamesUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.IfVideoGameInDatabaseUseCase
+import com.example.core_database_domain.userCase.favoriteVideoGame.AddFavoriteVideoGamesUseCase
 import com.example.core_network_domain.useCase.game.*
 import com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment
 import com.example.feature_video_game_info.screens.videoGameInfo.VideoGameInfoFragment
@@ -39,9 +39,9 @@ interface GameInfoDeps{
     val getTrailerUseCase: GetTrailerUseCase
     val getSeriesUseCase: GetSeriesUseCase
     val getAdditionsUseCase:GetAdditionsUseCase
-    val getCheckVideoGameByIdUseCase: GetCheckVideoGameByIdUseCase
+    val getCheckVideoGameByIdUseCase: IfVideoGameInDatabaseUseCase
     val deleteFavoriteVideoGamesUseCase: DeleteFavoriteVideoGamesUseCase
-    val writeFavoriteVideoGamesUseCase: WriteFavoriteVideoGamesUseCase
+    val writeFavoriteVideoGamesUseCase: AddFavoriteVideoGamesUseCase
 }
 
 interface GameInfoDepsProvider{

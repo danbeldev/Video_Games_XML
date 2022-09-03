@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
-        minSdk 23
-        targetSdk 32
+        minSdk 21
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -81,9 +81,6 @@ dependencies {
 
     //Coil
     implementation("io.coil-kt:coil:2.1.0")
-
-    //Realm
-    implementation("io.realm.kotlin:library-base:0.10.0")
 
     //Dagger
     implementation("com.google.dagger:dagger:2.41")

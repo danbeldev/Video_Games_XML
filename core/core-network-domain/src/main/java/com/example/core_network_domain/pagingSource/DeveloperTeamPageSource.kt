@@ -1,4 +1,4 @@
-package com.example.core_network_domain.source
+package com.example.core_network_domain.pagingSource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
