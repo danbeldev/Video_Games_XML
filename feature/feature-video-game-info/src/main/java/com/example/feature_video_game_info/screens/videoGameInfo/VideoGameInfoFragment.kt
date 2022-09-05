@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.core_common.extension.launchWhenStarted
+import com.example.core_common.extension.launchWhenStartedPagingData
 import com.example.core_common.extension.parseHtml
 import com.example.core_common.naigation.NavCommand
 import com.example.core_common.naigation.NavCommands
@@ -27,6 +28,7 @@ import com.example.feature_video_game_info.R
 import com.example.feature_video_game_info.databinding.FragmentVideoGameInfoBinding
 import com.example.feature_video_game_info.di.GameInfoComponentViewModel
 import com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment
+import com.example.feature_video_game_info.screens.qrCodeVideoGameScreen.QrCodeVideoGameFragment
 import com.example.feature_video_game_info.screens.videoGameInfo.adapter.AchievementAdapter
 import com.example.feature_video_game_info.screens.videoGameInfo.adapter.AdditionsHorizontalAdapter
 import com.example.feature_video_game_info.screens.videoGameInfo.adapter.DeveloperTeamAdapter
@@ -36,7 +38,6 @@ import com.example.feature_video_game_info.screens.videoGameInfo.adapter.Trailer
 import com.example.feature_video_game_info.screens.videoGameInfo.viewModel.VideoGameInfoViewModel
 import com.example.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment
 import dagger.Lazy
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -151,74 +152,83 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
         val additionsLayoutManager = LinearLayoutManager(this.context)
         additionsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
-        viewModel.getVideoGameInfo(videoGameId)
-        viewModel.responseVideoGameInfo.onEach {
-            when(val result = it){
-                is Result.Error -> {
-                    binding.videoGameInfo.visibility = View.GONE
-                    binding.responseVideoGameInfo.visibility = View.VISIBLE
-                    binding.message.text = result.message
-                }
-                is Result.Loading -> {
-                    binding.videoGameInfo.visibility = View.GONE
-                    binding.responseVideoGameInfo.visibility = View.VISIBLE
-                    binding.message.text = "Loading..."
-                }
-                is Result.Success -> {
-                    videoGame = result.data!!
-                    successVideoGameInfo(binding)
-                }
-            }
-        }.launchWhenStarted(lifecycle,lifecycleScope)
+        launchWhenStarted {
+            viewModel.getVideoGameInfo(videoGameId)
 
-        viewModel.getTrailer(videoGameId)
-        viewModel.responseTrailer.onEach {
-            when(val result = it){
-                is Result.Error -> Unit
-                is Result.Loading -> Unit
-                is Result.Success -> successTrailer(binding, result.data!!, videoGameId)
-            }
-        }.launchWhenStarted(lifecycle,lifecycleScope)
-
-        viewModel.getAchievements(videoGameId)
-        viewModel.responseAchievements.onEach {
-            when(val result = it){
-                is Result.Error -> Unit
-                is Result.Loading -> Unit
-                is Result.Success -> successAchievements(binding, result.data!!)
-            }
-        }.launchWhenStarted(lifecycle, lifecycleScope)
-
-        lifecycleScope.launchWhenStarted {
-            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
-                viewModel.getScreenshots(
-                    gamePk = videoGameId.toString()
-                ).collectLatest(screenshotsAdapter::submitData)
+            viewModel.responseVideoGameInfo.onEach {
+                when(val result = it){
+                    is Result.Error -> {
+                        binding.videoGameInfo.visibility = View.GONE
+                        binding.responseVideoGameInfo.visibility = View.VISIBLE
+                        binding.message.text = result.message
+                    }
+                    is Result.Loading -> {
+                        binding.videoGameInfo.visibility = View.GONE
+                        binding.responseVideoGameInfo.visibility = View.VISIBLE
+                        binding.message.text = "Loading..."
+                    }
+                    is Result.Success -> {
+                        videoGame = result.data!!
+                        successVideoGameInfo(binding)
+                    }
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
-                viewModel.getDeveloperTeam(
-                    gamePk = videoGameId
-                ).collectLatest(developerTeamAdapter::submitData)
+        launchWhenStarted {
+            viewModel.getTrailer(videoGameId)
+
+            viewModel.responseTrailer.onEach {
+                when(val result = it){
+                    is Result.Error -> Unit
+                    is Result.Loading -> Unit
+                    is Result.Success -> successTrailer(binding, result.data!!, videoGameId)
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
-                viewModel.getAdditions(
-                    gamePk = videoGameId
-                ).collectLatest(additionsAdapter::submitData)
+        launchWhenStarted {
+            viewModel.getAchievements(videoGameId)
+
+            viewModel.responseAchievements.onEach {
+                when(val result = it){
+                    is Result.Error -> Unit
+                    is Result.Loading -> Unit
+                    is Result.Success -> successAchievements(binding, result.data!!)
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            lifecycle.whenStateAtLeast(Lifecycle.State.STARTED){
-                viewModel.getSeries(
-                    gamePk = videoGameId
-                ).collectLatest(seriesAdapter::submitData)
-            }
+        launchWhenStartedPagingData(
+            adapter = screenshotsAdapter
+        ){
+            viewModel.getScreenshots(
+                gamePk = videoGameId.toString()
+            )
+        }
+
+        launchWhenStartedPagingData(
+            adapter = developerTeamAdapter
+        ){
+            viewModel.getDeveloperTeam(
+                gamePk = videoGameId
+            )
+        }
+
+        launchWhenStartedPagingData(
+            adapter = additionsAdapter
+        ){
+            viewModel.getAdditions(
+                gamePk = videoGameId
+            )
+        }
+
+        launchWhenStartedPagingData(
+            adapter = seriesAdapter
+        ){
+            viewModel.getSeries(
+                gamePk = videoGameId
+            )
         }
 
         binding.screenshots.adapter = screenshotsAdapter
@@ -237,6 +247,14 @@ class VideoGameInfoFragment : Fragment(R.layout.fragment_video_game_info){
             findNavController().navigate(
                 R.id.action_videoGameInfoFragment_to_achievementsFragment,
                 bundleOf(AchievementsFragment.VIDEO_GAME_ID_KEY to videoGameId),
+                navOptionIsModal()
+            )
+        }
+
+        binding.qrCodeImage.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_videoGameInfoFragment_to_qrCodeVideoGameFragment,
+                bundleOf(QrCodeVideoGameFragment.VIDEO_GAME_ID_KEY to videoGameId),
                 navOptionIsModal()
             )
         }

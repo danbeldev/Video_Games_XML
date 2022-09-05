@@ -3,6 +3,8 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
@@ -21,9 +23,12 @@ import com.example.feature_main.di.MainComponentViewModel
 import com.example.feature_main.screens.likesScreen.adapter.FavoriteVideoGameAdapter
 import com.example.feature_main.screens.likesScreen.viewModel.LikesViewModel
 import dagger.Lazy
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LikesFragment:Fragment(R.layout.fragment_likes) {
+class LikesFragment:Fragment(R.layout.fragment_likes), SearchView.OnQueryTextListener {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<LikesViewModel.Factory>
@@ -66,6 +71,28 @@ class LikesFragment:Fragment(R.layout.fragment_likes) {
 
         binding.favoriteVideoGames.adapter = favoriteVideoGameAdapter
 
+        binding.topToolbar.menu.forEach { menuItem ->
+            when(menuItem.itemId){
+                R.id.search -> {
+                    val search = menuItem.actionView as SearchView
+                    search.isSubmitButtonEnabled = true
+                    search.setOnQueryTextListener(this)
+                }
+            }
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            favoriteVideoGameAdapter.onPagesUpdatedFlow.collect {
+                if (favoriteVideoGameAdapter.itemCount <= 0){
+                    binding.noItemsAnimation.visibility = View.VISIBLE
+                    binding.favoriteVideoGames.visibility = View.GONE
+                }else{
+                    binding.noItemsAnimation.visibility = View.GONE
+                    binding.favoriteVideoGames.visibility = View.VISIBLE
+                }
+            }
+        }
+
         swipeToDelete()
     }
 
@@ -82,6 +109,21 @@ class LikesFragment:Fragment(R.layout.fragment_likes) {
 
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(binding.favoriteVideoGames)
+    }
 
+    override fun onQueryTextSubmit(search: String?): Boolean {
+        launchWhenStartedPagingData(
+            adapter = favoriteVideoGameAdapter
+        ){ viewModel.getFavoriteVideoGames(search = search ?: "") }
+
+        return true
+    }
+
+    override fun onQueryTextChange(search: String?): Boolean {
+        launchWhenStartedPagingData(
+            adapter = favoriteVideoGameAdapter
+        ){ viewModel.getFavoriteVideoGames(search = search ?: "") }
+
+        return true
     }
 }

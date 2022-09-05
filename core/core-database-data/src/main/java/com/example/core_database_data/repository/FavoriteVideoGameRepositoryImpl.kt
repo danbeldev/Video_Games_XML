@@ -13,7 +13,7 @@ class FavoriteVideoGameRepositoryImpl @Inject constructor(
 
     override suspend fun addItem(item: FavoriteVideoGameDTO) = dao.upsertItem(item)
 
-    override fun getItems(search:String): PagingSource<Int, FavoriteVideoGameDTO> = dao.getItems(search)
+    override fun getItems(search:String): PagingSource<Int, FavoriteVideoGameDTO> = dao.getItemsPagingSource(search)
 
     override fun getCount(): Flow<Int> = dao.getCount()
 

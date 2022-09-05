@@ -15,7 +15,10 @@ interface FavoriteVideoGameDAO {
     suspend fun upsertItem(item: FavoriteVideoGameDTO)
 
     @Query("SELECT * FROM favorite_video_game WHERE name LIKE '%' || :search || '%' ORDER BY date DESC")
-    fun getItems(search:String = ""): PagingSource<Int, FavoriteVideoGameDTO>
+    fun getItemsPagingSource(search:String = ""): PagingSource<Int, FavoriteVideoGameDTO>
+
+    @Query("SELECT * FROM favorite_video_game WHERE name LIKE '%' || :search || '%' ORDER BY date DESC")
+    fun getItems(search: String = ""):Flow<List<FavoriteVideoGameDTO>>
 
     @Query("SELECT * FROM favorite_video_game WHERE id=:id")
     suspend fun getItem(id:Int):FavoriteVideoGameDTO?

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_videoGameInfoFragment_self"
             app:destination="@id/videoGameInfoFragment" />
+        <action
+            android:id="@+id/action_videoGameInfoFragment_to_qrCodeVideoGameFragment"
+            app:destination="@id/qrCodeVideoGameFragment" />
 
     </fragment>
     <fragment
@@ -39,4 +42,8 @@
         android:id="@+id/achievementsFragment"
         android:name="com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment"
         android:label="AchievementsFragment" />
+    <fragment
+        android:id="@+id/qrCodeVideoGameFragment"
+        android:name="com.example.feature_video_game_info.screens.qrCodeVideoGameScreen.QrCodeVideoGameFragment"
+        android:label="QrCodeVideoGameFragment" />
 </navigation>
