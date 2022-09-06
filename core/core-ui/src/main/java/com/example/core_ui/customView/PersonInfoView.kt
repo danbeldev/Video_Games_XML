@@ -123,13 +123,10 @@ class PersonInfoView(
 
         listPositions?.let {
             listPositions.forEachIndexed { index, name ->
+                if (index > 3) return@forEachIndexed
+
                 positions = if (index == 0)
-                    if (listPositions.lastIndex == 0)
-                        "${name}."
-                    else
-                        name
-                else if (listPositions.lastIndex == index)
-                    "$positions, ${name}."
+                    name
                 else
                     "$positions, $name"
             }

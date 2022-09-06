@@ -33,6 +33,7 @@ android {
 dependencies {
 
     implementation project(":core:core-model")
+    implementation project(":core:core-common")
     implementation project(":core:core-network-domain")
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -45,6 +46,7 @@ dependencies {
     //Retrofit
     def retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     //RxJava

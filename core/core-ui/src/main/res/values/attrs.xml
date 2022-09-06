@@ -50,4 +50,22 @@
         <attr name="video_game_three_text"/>
         <attr name="video_game_three_count"/>
     </declare-styleable>
+
+    <declare-styleable name="VideoGameCardInfoView">
+
+        <attr name="video_game_image" format="reference"/>
+        <attr name="video_game_platform_windows" format="boolean"/>
+        <attr name="video_game_platform_ps" format="boolean"/>
+        <attr name="video_game_platform_xbox" format="boolean"/>
+        <attr name="video_game_platform_nintendo" format="boolean"/>
+        <attr name="video_game_platform_android" format="boolean"/>
+        <attr name="video_game_platform_ios" format="boolean"/>
+        <attr name="video_game_platform_linux" format="boolean"/>
+        <attr name="video_game_metacritic_rating" format="string"/>
+        <attr name="video_game_title" format="string"/>
+        <attr name="video_game_release_date" format="string"/>
+        <attr name="video_game_genres" format="string"/>
+        <attr name="video_game_stores" format="string"/>
+
+    </declare-styleable>
 </resources>

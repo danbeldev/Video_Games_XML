@@ -2,8 +2,8 @@ package com.example.core_network_data.api
 
 import com.example.core_model.api.tag.Tag
 import com.example.core_model.api.tag.TagInfo
-import com.example.core_network_data.common.ConstantsUrl.RAWQ_KEY
-import com.example.core_network_data.common.ConstantsUrl.TAGS_URL
+import com.example.core_network_data.common.ConstantUrls.RAWQ_KEY
+import com.example.core_network_data.common.ConstantUrls.TAGS_URL
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET

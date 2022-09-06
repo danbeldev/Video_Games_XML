@@ -13,7 +13,6 @@ import com.example.videogames.R
 class FragmentSplash:Fragment(R.layout.fragment_splash){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         navigation(
             NavCommand(
                 NavCommands.DeepLink(
@@ -24,5 +23,4 @@ class FragmentSplash:Fragment(R.layout.fragment_splash){
             )
         )
     }
-
 }

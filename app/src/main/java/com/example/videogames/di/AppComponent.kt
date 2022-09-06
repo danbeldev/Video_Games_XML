@@ -6,6 +6,8 @@ import com.example.core_database_data.di.repository.FavoriteVideoGameRepositoryM
 import com.example.core_database_data.di.room.dao.FavoriteVideoGameDaoModule
 import com.example.core_database_data.di.room.database.UserDatabaseModule
 import com.example.core_database_domain.userCase.favoriteVideoGame.*
+import com.example.core_network_data.di.RetrofitModule
+import com.example.core_network_data.di.api.*
 import com.example.core_network_domain.useCase.creator.GetCreatorByIdUseCase
 import com.example.core_network_domain.useCase.creator.GetCreatorsUseCase
 import com.example.core_network_domain.useCase.game.*
@@ -23,10 +25,15 @@ import dagger.BindsInstance
 import dagger.Component
 
 @[AppScope Component(modules = [
-    ApiModule::class,
     FavoriteVideoGameDaoModule::class,
     FavoriteVideoGameRepositoryModule::class,
-    UserDatabaseModule::class
+    UserDatabaseModule::class,
+    RetrofitModule::class,
+    CreatorApiModule::class,
+    GamesApiModule::class,
+    PlatformApiModule::class,
+    StoreApiModule::class,
+    TagApiModule::class
 ])]
 interface AppComponent
     : MainDeps, GameInfoDeps, PlatformDeps, CreatorDeps, StoreDeps

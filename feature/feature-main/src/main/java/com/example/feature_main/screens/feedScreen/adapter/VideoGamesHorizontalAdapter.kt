@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.example.core_model.api.platform.PlatformName
 import com.example.core_model.api.videoGame.VideoGameItem
 import com.example.feature_main.databinding.ItemVideoGameHorizontalBinding
 
@@ -13,12 +13,19 @@ internal class VideoGamesHorizontalAdapter(
     private val onClickVideoGame:(Int) -> Unit
 ) : PagingDataAdapter<VideoGameItem, VideoGamesViewHolder>(VideoGameItemDiffItemCallback) {
     override fun onBindViewHolder(holder: VideoGamesViewHolder, position: Int) {
-        val videoGame = getItem(position)
+        val videoGame = getItem(position) ?: return
 
-        with(holder.binding){
-            videoGameTitle.text = videoGame?.name
-            videoGameImage.load(videoGame?.background_image)
-            videoGameCard.setOnClickListener { videoGame?.id?.let { onClickVideoGame(it) } }
+        with(holder.binding.videoGameCard){
+            setVideoGameTitle(videoGame.name)
+            setVideoGameImage(data = videoGame.background_image)
+            setVideoGameMetacriticRating(videoGame.metacritic.toString())
+
+            setPlatforms(videoGame.parent_platforms.map { it!!.platform!!.name })
+
+            setVideoGameGenres(videoGame.genres.map { it.name })
+            setVideoGameStores(videoGame.stores.map { it.store.name })
+
+            setOnClickListener { onClickVideoGame(videoGame.id) }
         }
     }
 

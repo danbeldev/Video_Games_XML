@@ -3,7 +3,7 @@ package com.example.core_model.api.platform
 data class Platform(
     val count:Int,
     val next:String,
-    val results:List<PlatformItem>
+    val results:List<PlatformItem> = emptyList()
 )
 
 data class PlatformItem(

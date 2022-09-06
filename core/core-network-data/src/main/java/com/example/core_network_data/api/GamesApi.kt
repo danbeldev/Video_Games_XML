@@ -2,14 +2,14 @@ package com.example.core_network_data.api
 
 import com.example.core_model.api.creator.Creator
 import com.example.core_model.api.videoGame.*
-import com.example.core_network_data.common.ConstantsUrl.GAMES_ACHIEVEMENTS_URL
-import com.example.core_network_data.common.ConstantsUrl.GAMES_SCREENSHOT_URL
-import com.example.core_network_data.common.ConstantsUrl.GAMES_URL
-import com.example.core_network_data.common.ConstantsUrl.GAME_ADDITIONS_URL
-import com.example.core_network_data.common.ConstantsUrl.GAME_DEVELOPER_TEAM_URL
-import com.example.core_network_data.common.ConstantsUrl.GAME_SERIES_URL
-import com.example.core_network_data.common.ConstantsUrl.GAME_TRAILER_URL
-import com.example.core_network_data.common.ConstantsUrl.RAWQ_KEY
+import com.example.core_network_data.common.ConstantUrls.GAMES_ACHIEVEMENTS_URL
+import com.example.core_network_data.common.ConstantUrls.GAMES_SCREENSHOT_URL
+import com.example.core_network_data.common.ConstantUrls.GAMES_URL
+import com.example.core_network_data.common.ConstantUrls.GAME_ADDITIONS_URL
+import com.example.core_network_data.common.ConstantUrls.GAME_DEVELOPER_TEAM_URL
+import com.example.core_network_data.common.ConstantUrls.GAME_SERIES_URL
+import com.example.core_network_data.common.ConstantUrls.GAME_TRAILER_URL
+import com.example.core_network_data.common.ConstantUrls.RAWQ_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

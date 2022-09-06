@@ -1,6 +1,8 @@
 package com.example.core_network_data.common
 
-internal object ConstantsUrl {
+internal object ConstantUrls {
+
+    const val BASE_URL = "https://api.rawg.io"
 
     const val GAMES_URL = "/api/games"
     const val GAMES_ACHIEVEMENTS_URL = "/api/games/{id}/achievements"

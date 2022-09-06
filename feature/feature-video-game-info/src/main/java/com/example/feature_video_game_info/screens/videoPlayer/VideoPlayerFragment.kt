@@ -118,7 +118,7 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
         data: VideoGameInfo,
         videoGameId:Int
     ){
-        biding.imageVideoGame.load(data.background_image)
+        biding.videoGameImage.load(data.background_image)
         biding.videoGameTitle.text = data.name
         biding.videoGameDescription.text = data.description
 

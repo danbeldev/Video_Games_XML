@@ -14,4 +14,11 @@
     <string name="card_info_name">Ubisoft</string>
     <string name="popular_items_text">Popular items</string>
     <string name="popular_items">334</string>
+    <string name="metacritic_rating">90</string>
+    <string name="video_game_release_date_name">Release date:</string>
+    <string name="video_game_release_date">Sep 17, 2013</string>
+    <string name="video_game_genres_name">Genres:</string>
+    <string name="video_game_genres">Adventure, Action…</string>
+    <string name="video_game_stores_name">Stores</string>
+    <string name="video_game_stores">Steam, PlayStation Store…</string>
 </resources>

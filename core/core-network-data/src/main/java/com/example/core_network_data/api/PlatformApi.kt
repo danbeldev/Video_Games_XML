@@ -2,8 +2,8 @@ package com.example.core_network_data.api
 
 import com.example.core_model.api.platform.Platform
 import com.example.core_model.api.platform.PlatformInfo
-import com.example.core_network_data.common.ConstantsUrl.PLATFORMS_URL
-import com.example.core_network_data.common.ConstantsUrl.RAWQ_KEY
+import com.example.core_network_data.common.ConstantUrls.PLATFORMS_URL
+import com.example.core_network_data.common.ConstantUrls.RAWQ_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
