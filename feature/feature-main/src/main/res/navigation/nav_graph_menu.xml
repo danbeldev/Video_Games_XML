@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/likesFragment"
-        android:name="com.example.feature_main.screens.likesScreen.LikesFragment"
+        android:name="com.madproject.feature_main.screens.likesScreen.LikesFragment"
         android:label="LikesFragment" />
 
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.feature_main.screens.feedScreen.FeedFragment"
+        android:name="com.madproject.feature_main.screens.feedScreen.FeedFragment"
         android:label="FeedFragment" >
         <action
             android:id="@+id/action_feedFragment_to_videoGamesFragment"
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/videoGamesFragment"
-        android:name="com.example.feature_main.screens.videoGamesScreen.VideoGamesFragment"
+        android:name="com.madproject.feature_main.screens.videoGamesScreen.VideoGamesFragment"
         android:label="VideoGamesFragment" />
 
 </navigation>

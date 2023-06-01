@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.feature_main.screens.mainScreen.MainFragment"
+        android:name="com.madproject.feature_main.screens.mainScreen.MainFragment"
         android:label="MainFragment" >
 
         <deepLink app:uri="jetnavapp://main" />

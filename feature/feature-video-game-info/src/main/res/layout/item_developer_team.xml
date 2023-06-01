@@ -6,7 +6,7 @@
     android:layout_margin="10dp"
     android:background="@color/primary_background">
 
-    <com.example.core_ui.customView.PersonInfoView
+    <com.madproject.core_ui.customView.PersonInfoView
         android:id="@+id/developer_team"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

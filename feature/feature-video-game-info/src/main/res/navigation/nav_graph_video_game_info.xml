@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/videoGameInfoFragment"
-        android:name="com.example.feature_video_game_info.screens.videoGameInfo.VideoGameInfoFragment"
+        android:name="com.madproject.feature_video_game_info.screens.videoGameInfo.VideoGameInfoFragment"
         android:label="fragment_video_game_info"
         tools:layout="@layout/fragment_video_game_info" >
 
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/videoPlayerFragment"
-        android:name="com.example.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment"
+        android:name="com.madproject.feature_video_game_info.screens.videoPlayer.VideoPlayerFragment"
         android:label="VideoPlayerFragment" >
         <action
             android:id="@+id/action_videoPlayerFragment_to_videoGameInfoFragment"
@@ -40,10 +40,10 @@
     </fragment>
     <fragment
         android:id="@+id/achievementsFragment"
-        android:name="com.example.feature_video_game_info.screens.achievementsScreen.AchievementsFragment"
+        android:name="com.madproject.feature_video_game_info.screens.achievementsScreen.AchievementsFragment"
         android:label="AchievementsFragment" />
     <fragment
         android:id="@+id/qrCodeVideoGameFragment"
-        android:name="com.example.feature_video_game_info.screens.qrCodeVideoGameScreen.QrCodeVideoGameFragment"
+        android:name="com.madproject.feature_video_game_info.screens.qrCodeVideoGameScreen.QrCodeVideoGameFragment"
         android:label="QrCodeVideoGameFragment" />
 </navigation>

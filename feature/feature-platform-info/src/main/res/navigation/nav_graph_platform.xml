@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/platformInfoFragment"
-        android:name="com.example.feature_platform_info.screens.platformInfo.PlatformInfoFragment"
+        android:name="com.madproject.feature_platform_info.screens.platformInfo.PlatformInfoFragment"
         android:label="PlatformInfoFragment" >
 
         <deepLink
@@ -22,6 +22,6 @@
     </fragment>
     <fragment
         android:id="@+id/platformVideoGamesFragment"
-        android:name="com.example.feature_platform_info.screens.platformVideoGames.PlatformVideoGamesFragment"
+        android:name="com.madproject.feature_platform_info.screens.platformVideoGames.PlatformVideoGamesFragment"
         android:label="PlatformVideoGamesFragment" />
 </navigation>

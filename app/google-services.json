@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "666733591512",
+    "project_id": "mad-video-game",
+    "storage_bucket": "mad-video-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666733591512:android:d2a9c76c9feb14ab9c90ad",
+        "android_client_info": {
+          "package_name": "com.madproject.videogames"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC42pR30_-jyqA8VWPmxOCqQFsRleV6T64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
